@@ -2,7 +2,7 @@
 
 Gotta list'em all
 
-Demo app usinghttps://pokeapi.co/
+Demo app using https://pokeapi.co/
 
 A user can list pokemons, filter by name, ID or multiple abilities.
 
