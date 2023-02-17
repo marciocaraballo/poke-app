@@ -1,0 +1,12 @@
+.poke-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 130px);
+    gap: 20px;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.poke-grid,
+.poke-content--not-available {
+    flex-basis: 75%;
+}

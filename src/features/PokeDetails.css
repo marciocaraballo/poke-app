@@ -1,0 +1,14 @@
+.poke-details {
+    flex-basis: 25%;
+    flex-grow: 0;
+    flex-shrink: 0;
+    padding-left: 5px;
+}
+
+.poke-details__panel {
+    border-left: 1px solid gray;
+    border-top: 1px solid gray;
+    text-align: center;
+    height: 100%;
+    text-transform: capitalize;
+}

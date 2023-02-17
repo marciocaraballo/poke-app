@@ -1,0 +1,8 @@
+.input-label {
+    display: inline-block;
+}
+
+.input-label__input {
+    width: 300px;
+    margin-right: 5px;
+}

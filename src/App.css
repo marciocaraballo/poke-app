@@ -1,0 +1,23 @@
+.poke-app {
+  height: 100%;
+}
+
+.poke-content {
+  height: calc(100% - 85px);
+  padding-left: 10px;
+}
+
+.poke-header {
+  background-color: #282c34;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.poke-layout {
+  display: flex;
+  height: calc(100% - 98px);
+  padding-top: 5px;
+}
