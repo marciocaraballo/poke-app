@@ -7,7 +7,6 @@
         "@testing-library/react": "13.4.0",
         "@testing-library/user-event": "13.5.0",
         "@types/jest": "27.5.2",
-        "@types/node": "16.18.12",
         "@types/react": "18.0.28",
         "@types/react-dom": "18.0.10",
         "react": "18.2.0",
@@ -19,10 +18,12 @@
         "run": "npm install && npm start",
         "start": "react-scripts start",
         "build": "react-scripts build",
-        "test": "react-scripts test",
+        "test": "react-scripts test --testPathIgnorePatterns=e2e",
+        "test:e2e": "playwright test",
         "eject": "react-scripts eject",
         "prepare": "husky install",
-        "docker": "docker compose up"
+        "docker": "docker compose up",
+        "prettier": "npx prettier --write ."
     },
     "eslintConfig": {
         "extends": [
@@ -43,7 +44,9 @@
         ]
     },
     "devDependencies": {
-        "husky": "^8.0.0",
+        "@playwright/test": "1.30.0",
+        "@types/node": "18.13.0",
+        "husky": "8.0.0",
         "prettier": "2.8.4"
     }
 }
