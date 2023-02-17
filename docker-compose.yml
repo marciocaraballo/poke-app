@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  poke-app:
+    container_name: docker-cra
+    image: docker-react-i
+    build:
+      context: .
+    ports:
+      - 3000:3000
