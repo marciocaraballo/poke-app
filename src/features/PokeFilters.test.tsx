@@ -1,20 +1,21 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import PokeFilters, { PokeFiltersProps } from './PokeFilters';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import PokeFilters, { PokeFiltersProps } from './PokeFilters'
 
-import { listPokemons, getPokemonsByAbilities } from '../utils/fetch';
+import { listPokemons, getPokemonsByAbilities } from '../utils/fetch'
 
-const mockListPokemons = listPokemons as jest.MockedFunction<typeof listPokemons>;
-const mockGetPokemonsByAbilities = getPokemonsByAbilities as jest.MockedFunction<typeof getPokemonsByAbilities>; 
+const mockListPokemons = listPokemons as jest.MockedFunction<
+    typeof listPokemons
+>
+const mockGetPokemonsByAbilities =
+    getPokemonsByAbilities as jest.MockedFunction<typeof getPokemonsByAbilities>
 
-jest.mock('../utils/fetch');
+jest.mock('../utils/fetch')
 
 describe('<PokeFilters/>', () => {
-
-    let props: PokeFiltersProps;
+    let props: PokeFiltersProps
 
     beforeEach(() => {
-
-        jest.resetModules();
+        jest.resetModules()
 
         props = {
             pageSize: 10,
@@ -24,72 +25,76 @@ describe('<PokeFilters/>', () => {
             abilitiesFilter: '',
             setAbilitiesFilter: jest.fn(),
             setPokemonList: jest.fn(),
-            setIsApiDown: jest.fn()
-        };
-    });
+            setIsApiDown: jest.fn(),
+        }
+    })
 
     it('should call setPageSize() with expected params when changing select', () => {
-        render(<PokeFilters {...props}/>);
+        render(<PokeFilters {...props} />)
 
-        const select = screen.getByTestId('page-size-select');
+        const select = screen.getByTestId('page-size-select')
 
-        fireEvent.change(select, { target: { value: '50' }});
+        fireEvent.change(select, { target: { value: '50' } })
 
-        expect(props.setPageSize).toHaveBeenCalledWith(50);
-    });
+        expect(props.setPageSize).toHaveBeenCalledWith(50)
+    })
 
     it('should call setNameOrIdFilter() with expected params when changing nameOrFilter input', () => {
-        render(<PokeFilters {...props}/>);
+        render(<PokeFilters {...props} />)
 
-        const input = screen.getByPlaceholderText('Enter Pokemon name or ID');
+        const input = screen.getByPlaceholderText('Enter Pokemon name or ID')
 
-        fireEvent.change(input, { target: { value: 'abra' }});
+        fireEvent.change(input, { target: { value: 'abra' } })
 
-        expect(props.setNameOrIdFilter).toHaveBeenCalledWith('abra');
-    });
+        expect(props.setNameOrIdFilter).toHaveBeenCalledWith('abra')
+    })
 
     it('should call setAbilitiesFilter() with expected params when changing nameOrFilter input', () => {
-        render(<PokeFilters {...props}/>);
+        render(<PokeFilters {...props} />)
 
-        const input = screen.getByPlaceholderText('Enter abilities comma separated list');
+        const input = screen.getByPlaceholderText(
+            'Enter abilities comma separated list'
+        )
 
-        fireEvent.change(input, { target: { value: 'overgrow,run' }});
+        fireEvent.change(input, { target: { value: 'overgrow,run' } })
 
-        expect(props.setAbilitiesFilter).toHaveBeenCalledWith('overgrow,run');
-    });
+        expect(props.setAbilitiesFilter).toHaveBeenCalledWith('overgrow,run')
+    })
 
     it('should call setPokemonList() when appliedFilters is empty', async () => {
-
         await mockListPokemons.mockResolvedValue({
-            count:1,
+            count: 1,
             next: null,
             previous: null,
-            results: [{ name: 'abra', url: 'url/abra' }]
-        });
+            results: [{ name: 'abra', url: 'url/abra' }],
+        })
 
-        render(<PokeFilters {...props}/>);
+        render(<PokeFilters {...props} />)
 
-        const button = screen.getByTestId('apply-button');
+        const button = screen.getByTestId('apply-button')
 
-        fireEvent.click(button);
+        fireEvent.click(button)
 
         await waitFor(() => {
-            expect(props.setPokemonList).toHaveBeenCalled();
-        });
-    });
+            expect(props.setPokemonList).toHaveBeenCalled()
+        })
+    })
 
     it('should call setPokemonList() when abilitiesFilter is not empty', async () => {
+        await mockGetPokemonsByAbilities.mockResolvedValue([
+            { name: 'abra', url: 'url/abra' },
+        ])
 
-        await mockGetPokemonsByAbilities.mockResolvedValue([{ name: 'abra', url: 'url/abra' }]);
+        render(<PokeFilters {...props} abilitiesFilter="overgrow" />)
 
-        render(<PokeFilters {...props} abilitiesFilter="overgrow"/>);
+        const button = screen.getByTestId('apply-button')
 
-        const button = screen.getByTestId('apply-button');
-
-        fireEvent.click(button);
+        fireEvent.click(button)
 
         await waitFor(() => {
-            expect(props.setPokemonList).toHaveBeenCalledWith([{ name: 'abra', url: 'url/abra' }]);
-        });
-    });
-});
+            expect(props.setPokemonList).toHaveBeenCalledWith([
+                { name: 'abra', url: 'url/abra' },
+            ])
+        })
+    })
+})

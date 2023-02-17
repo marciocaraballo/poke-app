@@ -1,83 +1,83 @@
 import {
     listPokemons,
     getPokemonDetails,
-    getPokemonsByAbilities
- } from "./fetch";
+    getPokemonsByAbilities,
+} from './fetch'
 
-
-const unmockedFetch = global.fetch;
+const unmockedFetch = global.fetch
 
 describe('fetchUtils', () => {
-
     beforeEach(() => {
-        jest.resetAllMocks();
-    });
+        jest.resetAllMocks()
+    })
 
-    it ('should call fetch() correctly for listPokemons()', async () => {
-
+    it('should call fetch() correctly for listPokemons()', async () => {
         global.fetch = jest.fn(() =>
             Promise.resolve({
                 json: () => Promise.resolve({ test: 100 }),
-                ok: 'OK'
+                ok: 'OK',
             })
-        ) as jest.Mock;
+        ) as jest.Mock
 
-        await listPokemons();
+        await listPokemons()
 
         expect(global.fetch).toHaveBeenCalledWith(
-            'https://pokeapi.co/api/v2/pokemon?limit=3000', 
-            { "headers": {"Content-Type": "application/json"}, "method": "GET" });
-    });
+            'https://pokeapi.co/api/v2/pokemon?limit=3000',
+            { headers: { 'Content-Type': 'application/json' }, method: 'GET' }
+        )
+    })
 
-    it ('should call fetch() correctly for getPokemonDetails()', async () => {
-
+    it('should call fetch() correctly for getPokemonDetails()', async () => {
         global.fetch = jest.fn(() =>
             Promise.resolve({
-                json: () => Promise.resolve({
-                    id: 'id',
-                    name: 'name',
-                    height: 0,
-                    weight: 0,
-                    sprites: {
-                        front_default: 'front_default',
-                        back_default: 'back_default'
-                    },
-                    abilities: []
-                }),
-                ok: 'OK'
+                json: () =>
+                    Promise.resolve({
+                        id: 'id',
+                        name: 'name',
+                        height: 0,
+                        weight: 0,
+                        sprites: {
+                            front_default: 'front_default',
+                            back_default: 'back_default',
+                        },
+                        abilities: [],
+                    }),
+                ok: 'OK',
             })
-        ) as jest.Mock;
+        ) as jest.Mock
 
-        await getPokemonDetails('/detailsUrl');
+        await getPokemonDetails('/detailsUrl')
 
-        expect(global.fetch).toHaveBeenCalledWith(
-            '/detailsUrl', 
-            { "headers": {"Content-Type": "application/json"}, "method": "GET" });
-    });
+        expect(global.fetch).toHaveBeenCalledWith('/detailsUrl', {
+            headers: { 'Content-Type': 'application/json' },
+            method: 'GET',
+        })
+    })
 
-    it ('should call fetch() correctly for getPokemonsByAbilities()', async () => {
-
+    it('should call fetch() correctly for getPokemonsByAbilities()', async () => {
         global.fetch = jest.fn(() =>
             Promise.resolve({
-                json: () => Promise.resolve({
-                    pokemon: [{
-                        pokemon: {
-                            name: 'abra',
-                            url: 'url/abra'
-                        }
-                    }]
-                }),
-                ok: 'OK'
+                json: () =>
+                    Promise.resolve({
+                        pokemon: [
+                            {
+                                pokemon: {
+                                    name: 'abra',
+                                    url: 'url/abra',
+                                },
+                            },
+                        ],
+                    }),
+                ok: 'OK',
             })
-        ) as jest.Mock;
+        ) as jest.Mock
 
-        await getPokemonsByAbilities(['overgrow', 'rust']);
+        await getPokemonsByAbilities(['overgrow', 'rust'])
 
-        expect(global.fetch).toHaveBeenCalledTimes(2);
-    });
+        expect(global.fetch).toHaveBeenCalledTimes(2)
+    })
 
     afterAll(() => {
-        global.fetch = unmockedFetch;
-    });
-
-});
+        global.fetch = unmockedFetch
+    })
+})
