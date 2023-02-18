@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import App from './App'
 import { listPokemons } from './utils/fetch'
 
@@ -12,9 +12,18 @@ describe('<App/>', () => {
         jest.resetModules()
     })
 
-    it('should render without crashing', () => {
+    it('should render a pokemon list', async () => {
+        await mockListPokemon.mockResolvedValue([
+            {
+                name: 'abra',
+                url: 'url/abra',
+            },
+        ])
+
         render(<App />)
 
-        expect(screen.getByText('Welcome to PokeApp!')).toBeInTheDocument()
+        await waitFor(() => {
+            expect(screen.getByText('abra')).toBeInTheDocument()
+        })
     })
 })

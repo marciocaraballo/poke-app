@@ -19,9 +19,9 @@ function App() {
     useEffect(() => {
         async function fetchPokemonList() {
             try {
-                const pokemonListResponse = await listPokemons()
+                const pokemonList = await listPokemons()
 
-                setPokemonList(pokemonListResponse.results)
+                setPokemonList(pokemonList)
             } catch (e) {
                 if (e instanceof Response && e.status >= 500) {
                     setIsApiDown(true)
