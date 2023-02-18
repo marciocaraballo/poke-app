@@ -11,8 +11,24 @@ jobs:
               with:
                   node-version: '16.x'
                   cache: 'npm'
-            - run: npm ci
-            - run: npm run build
+            - name: Install dependencies
+              run: npm ci
+            - name: Build application
+              run: npm run build
+    types:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Check out repository code
+              uses: actions/checkout@v3
+            - name: Use Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: '16.x'
+                  cache: 'npm'
+            - name: Install dependencies
+              run: npm ci
+            - name: TS Typechecking
+              run: npm run typecheck
     tests-unit:
         runs-on: ubuntu-latest
         steps:
@@ -23,8 +39,10 @@ jobs:
               with:
                   node-version: '16.x'
                   cache: 'npm'
-            - run: npm ci
-            - run: npm test
+            - name: Install dependencies
+              run: npm ci
+            - name: Run unit tests
+              run: npm test
     test-e2e:
         timeout-minutes: 60
         runs-on: ubuntu-latest

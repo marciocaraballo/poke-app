@@ -24,7 +24,8 @@
         "eject": "react-scripts eject",
         "prepare": "husky install",
         "docker": "docker compose up",
-        "prettier": "npx prettier --write ."
+        "prettier": "npx prettier --write .",
+        "typecheck": "tsc"
     },
     "eslintConfig": {
         "extends": [
