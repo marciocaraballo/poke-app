@@ -29,8 +29,8 @@ const PokeGrid = (props: PokeCardsProps) => {
 
     if (pokemonListIsLoading) {
         return (
-            <div className="poke-cards" data-testid="poke-cards-loading">
-                <Spinner />
+            <div className="poke-cards">
+                <Spinner dataTestId="poke-cards-loading" />
             </div>
         )
     }
