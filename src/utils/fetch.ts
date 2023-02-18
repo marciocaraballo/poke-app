@@ -41,11 +41,14 @@ const fetchUtil = async <T>(method: string, url: string): Promise<T> => {
     }
 }
 
-const listPokemons = async () =>
-    await fetchUtil<PokemonListResponse>(
+const listPokemons = async () => {
+    const response = await fetchUtil<PokemonListResponse>(
         'GET',
         buildUrlWithHostname('/pokemon?limit=3000')
     )
+
+    return response.results
+}
 
 /**
  * Response object is quite complex and returns many information pieces that
