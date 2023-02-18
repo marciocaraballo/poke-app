@@ -2,6 +2,7 @@ import {
     listPokemons,
     getPokemonDetails,
     getPokemonsByAbilities,
+    listAbilities,
 } from './fetch'
 
 const unmockedFetch = global.fetch
@@ -75,6 +76,22 @@ describe('fetchUtils', () => {
         await getPokemonsByAbilities(['overgrow', 'rust'])
 
         expect(global.fetch).toHaveBeenCalledTimes(2)
+    })
+
+    it('should call fetch() correctly for listAbilities()', async () => {
+        global.fetch = jest.fn(() =>
+            Promise.resolve({
+                json: () => Promise.resolve({ test: 100 }),
+                ok: 'OK',
+            })
+        ) as jest.Mock
+
+        await listAbilities()
+
+        expect(global.fetch).toHaveBeenCalledWith(
+            'https://pokeapi.co/api/v2/ability?limit=500',
+            { headers: { 'Content-Type': 'application/json' }, method: 'GET' }
+        )
     })
 
     afterAll(() => {
