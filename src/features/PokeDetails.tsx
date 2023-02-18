@@ -71,7 +71,9 @@ const PokeDetailsPanel = (props: PokeDetailsProps) => {
             <aside className="poke-details">
                 <div className="poke-details__panel">
                     <header>
-                        <h2>{pokemonDetails.name}</h2>
+                        <h2 data-testid="pokemon-details-name">
+                            {pokemonDetails.name}
+                        </h2>
                     </header>
                     <div>
                         {pokemonDetails.frontImageUrl === null ||

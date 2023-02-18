@@ -13,7 +13,7 @@ interface PokeCardsProps {
     readonly pokemonListIsLoading: boolean
 }
 
-const PokeGrid = (props: PokeCardsProps) => {
+const PokeCards = (props: PokeCardsProps) => {
     const {
         pokemonList,
         setSelectedPokemonUrl,
@@ -48,6 +48,7 @@ const PokeGrid = (props: PokeCardsProps) => {
             <div className="poke-cards__grid">
                 {filteredPokemons.slice(0, pageSize).map((pokemon) => (
                     <Card
+                        dataTestId="poke-card"
                         key={pokemon.name}
                         name={pokemon.name}
                         url={pokemon.url}
@@ -59,5 +60,5 @@ const PokeGrid = (props: PokeCardsProps) => {
     )
 }
 
-export default PokeGrid
+export default PokeCards
 export type { PokeCardsProps }

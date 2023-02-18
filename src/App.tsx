@@ -40,7 +40,7 @@ function App() {
     return (
         <div className="poke-app">
             <header className="poke-header">
-                <h1>Welcome to PokeApp!</h1>
+                <h1 data-testid="poke-app-welcome">Welcome to PokeApp!</h1>
             </header>
             <main className="poke-content">
                 <ApiStatus isApiDown={isApiDown} />
