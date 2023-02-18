@@ -3,6 +3,8 @@ import {
     PokemonAbility,
     PokeDetails,
     AbilityPokemons,
+    AbilityListResponse,
+    Ability,
 } from '../types'
 
 import findUniquePokemon from './findUniquePokemons'
@@ -119,4 +121,21 @@ const getPokemonsByAbilities = async (abilities: Array<string>) => {
     return findUniquePokemon(concatResults)
 }
 
-export { listPokemons, getPokemonDetails, getPokemonsByAbilities }
+/**
+ * Get pokemon abilities list
+ */
+const listAbilities = async (): Promise<Array<Ability>> => {
+    const abilities = await fetchUtil<AbilityListResponse>(
+        'GET',
+        buildUrlWithHostname(`/ability?limit=500`)
+    )
+
+    return abilities.results
+}
+
+export {
+    listPokemons,
+    getPokemonDetails,
+    getPokemonsByAbilities,
+    listAbilities,
+}

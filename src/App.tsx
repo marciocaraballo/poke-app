@@ -11,7 +11,6 @@ import { Pokemon } from './types'
 
 function App() {
     const [isApiDown, setIsApiDown] = useState(false)
-    const [abilitiesFilter, setAbilitiesFilter] = useState('')
     const [pokemonList, setPokemonList] = useState<ReadonlyArray<Pokemon>>([])
     const [nameOrIdFilter, setNameOrIdFilter] = useState('')
     const [selectedPokemonUrl, setSelectedPokemonUrl] = useState(undefined)
@@ -45,8 +44,6 @@ function App() {
                     setPageSize={setPageSize}
                     nameOrIdFilter={nameOrIdFilter}
                     setNameOrIdFilter={setNameOrIdFilter}
-                    abilitiesFilter={abilitiesFilter}
-                    setAbilitiesFilter={setAbilitiesFilter}
                     setPokemonList={setPokemonList}
                     setIsApiDown={setIsApiDown}
                 />

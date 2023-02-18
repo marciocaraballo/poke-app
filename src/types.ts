@@ -3,17 +3,20 @@ interface Pokemon {
     readonly url: string
 }
 
-interface PokemonListResponse {
-    readonly count: number
-    readonly next: string | null
-    readonly previous: string | null
-    readonly results: ReadonlyArray<Pokemon>
-}
-
 interface Ability {
     readonly name: string
     readonly url: string
 }
+
+interface ApiResponse<ResultType> {
+    readonly count: number
+    readonly next: string | null
+    readonly previous: string | null
+    readonly results: Array<ResultType>
+}
+
+type PokemonListResponse = ApiResponse<Pokemon>
+type AbilityListResponse = ApiResponse<Ability>
 
 interface PokemonAbility {
     readonly ability: Ability
@@ -48,4 +51,5 @@ export type {
     Ability,
     PokeDetails,
     AbilityPokemons,
+    AbilityListResponse,
 }
