@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react'
-import PokeGrid, { PokeGridProps } from './PokeGrid'
+import PokeCards, { PokeCardsProps } from './PokeCards'
 import filterPokemonList from '../utils/filterPokemonList'
 
 jest.mock('../utils/filterPokemonList')
@@ -8,8 +8,8 @@ const mockFilterPokemonList = filterPokemonList as jest.MockedFunction<
     typeof filterPokemonList
 >
 
-describe('<PokeGrid/>', () => {
-    let props: PokeGridProps
+describe('<PokeCards/>', () => {
+    let props: PokeCardsProps
 
     beforeEach(() => {
         jest.resetModules()
@@ -19,13 +19,14 @@ describe('<PokeGrid/>', () => {
             pokemonList: [],
             setSelectedPokemonUrl: jest.fn(),
             pageSize: 10,
+            pokemonListIsLoading: false,
         }
     })
 
     it('should render a message if filtered pokemon list is empty', () => {
         mockFilterPokemonList.mockReturnValue([])
 
-        render(<PokeGrid {...props} />)
+        render(<PokeCards {...props} />)
 
         expect(
             screen.getByText('No pokemons are available!')
@@ -37,7 +38,7 @@ describe('<PokeGrid/>', () => {
             { name: 'pokemonName', url: 'url' },
         ])
 
-        render(<PokeGrid {...props} />)
+        render(<PokeCards {...props} />)
 
         expect(screen.getByText('pokemonName')).toBeInTheDocument()
     })
@@ -47,12 +48,18 @@ describe('<PokeGrid/>', () => {
             { name: 'pokemonName', url: 'url' },
         ])
 
-        render(<PokeGrid {...props} />)
+        render(<PokeCards {...props} />)
 
         const card = screen.getByText('pokemonName')
 
         fireEvent.click(card)
 
         expect(props.setSelectedPokemonUrl).toHaveBeenCalledWith('url')
+    })
+
+    it('should render loading state when pokemonListIsLoading=true', () => {
+        render(<PokeCards {...props} pokemonListIsLoading={true} />)
+
+        expect(screen.getByTestId('poke-cards-loading')).toBeInTheDocument()
     })
 })
