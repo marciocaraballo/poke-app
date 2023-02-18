@@ -5,13 +5,15 @@ interface CardProps {
     readonly name: string
     readonly url: string
     readonly onCardClick: Function
+    readonly dataTestId: string
 }
 
 const Card = (props: CardProps) => {
-    const { name, url, onCardClick } = props
+    const { name, url, onCardClick, dataTestId } = props
 
     return (
         <article
+            data-testid={dataTestId}
             role="button"
             className="card"
             onClick={() => onCardClick(url)}

@@ -9,6 +9,7 @@ describe('<Card/>', () => {
             name: 'Abra',
             url: 'url/abra',
             onCardClick: jest.fn(),
+            dataTestId: 'dataTestId',
         }
     })
 
