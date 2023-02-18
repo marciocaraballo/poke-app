@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { getPokemonDetails } from '../utils/fetch'
 
 import { PokeDetails } from '../types'
+import Spinner from '../components/Spinner'
 
 interface PokeDetailsProps {
     readonly selectedPokemonUrl: string | undefined
@@ -13,6 +14,8 @@ interface PokeDetailsProps {
 const PokeDetailsPanel = (props: PokeDetailsProps) => {
     const { selectedPokemonUrl, setIsApiDown } = props
 
+    const [pokemonDetailsIsLoading, setPokemonDetailsIsLoading] =
+        useState(false)
     const [pokemonDetails, setPokemonDetails] = useState<PokeDetails>({
         id: undefined,
         name: '',
@@ -25,16 +28,20 @@ const PokeDetailsPanel = (props: PokeDetailsProps) => {
 
     useEffect(() => {
         async function fetchPokemonDetails(pokemonUrl: string) {
+            setPokemonDetailsIsLoading(true)
+
             try {
                 const pokemonDetailsResponse = await getPokemonDetails(
                     pokemonUrl
                 )
 
                 setPokemonDetails(pokemonDetailsResponse)
+                setPokemonDetailsIsLoading(false)
             } catch (e) {
                 if (e instanceof Response && e.status >= 500) {
                     setIsApiDown(true)
                 }
+                setPokemonDetailsIsLoading(false)
             }
         }
 
@@ -51,12 +58,20 @@ const PokeDetailsPanel = (props: PokeDetailsProps) => {
         )
     }
 
+    if (pokemonDetailsIsLoading) {
+        return (
+            <aside className="poke-details">
+                <Spinner dataTestId="poke-details-loading" />
+            </aside>
+        )
+    }
+
     if (pokemonDetails.id) {
         return (
             <aside className="poke-details">
                 <div className="poke-details__panel">
                     <header>
-                        <h3>{pokemonDetails.name}</h3>
+                        <h2>{pokemonDetails.name}</h2>
                     </header>
                     <div>
                         {pokemonDetails.frontImageUrl === null ||
