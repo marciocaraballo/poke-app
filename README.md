@@ -15,8 +15,12 @@ Tech stack
 -   Docker image added
 -   Github actions configured for pull requests
 
+
+
 Next steps
 
+-   Add error notifications when something goes wrong in BE
+-   Add more e2e (filtering e2e missing)
+-   Improve coverage %
 -   Deployment using a free tier service (when merging to master)
 -   Continue improving visuals
--   Adding more features
