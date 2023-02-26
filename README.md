@@ -1,10 +1,8 @@
-### PokeApp
-
-Gotta list'em all
+### PokeApp - Gotta list'em all
 
 Demo app using https://pokeapi.co/
 
-A user can list pokemons, filter by name, ID or multiple abilities.
+A user can list pokemons, filter by name, ID or (multiple) abilities.
 
 Tech stack
 
@@ -13,14 +11,6 @@ Tech stack
 -   Testing with Jest / RTL
 -   E2E testing with playwright
 -   Docker image added
--   Github actions configured for pull requests
+-   Github actions configured for pull requests to run different jobs
 
 
-
-Next steps
-
--   Add error notifications when something goes wrong in BE
--   Add more e2e (filtering e2e missing)
--   Improve coverage %
--   Deployment using a free tier service (when merging to master)
--   Continue improving visuals
