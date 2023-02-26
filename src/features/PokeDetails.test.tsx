@@ -55,6 +55,32 @@ describe('<PokeDetailsPanel/>', () => {
         })
     })
 
+    it('should call setIsApiDown(false) when API call was successful', async () => {
+        const pokeDetails: PokeDetails = {
+            id: 'id',
+            name: 'pikachu',
+            height: 10,
+            weight: 10,
+            frontImageUrl: 'frontImageUrl',
+            backImageUrl: 'backImageUrl',
+            abilities: [
+                {
+                    ability: { name: 'ability', url: 'url/ability' },
+                    is_hidden: false,
+                    slot: 1,
+                },
+            ],
+        }
+
+        await mockGetPokemonDetails.mockResolvedValue(pokeDetails)
+
+        render(<PokeDetailsPanel {...props} selectedPokemonUrl="url/abra" />)
+
+        await waitFor(() => {
+            expect(props.setIsApiDown).toHaveBeenCalledWith(false)
+        })
+    })
+
     it('should show pokemon abilities', async () => {
         const pokeDetails: PokeDetails = {
             id: 'id',
