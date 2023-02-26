@@ -16,7 +16,7 @@ const filterByPokemonlist = (
      */
     if (Number.isNaN(parsedInput)) {
         return pokemonList.filter((pokemon) =>
-            pokemon.name.startsWith(nameOrIdFilter)
+            pokemon.name.toLowerCase().startsWith(nameOrIdFilter.toLowerCase())
         )
     } else {
         /**
