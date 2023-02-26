@@ -36,6 +36,22 @@ describe('filterPokemonList()', () => {
         ])
     })
 
+    it('should return pokemonList if name filter matches by caseUnsensitive filter', () => {
+        const pokemonList = [
+            { name: 'abra', url: 'url/abra' },
+            { name: 'mew', url: 'url/mew' },
+            { name: 'mewtwo', url: 'url/mewtwo' },
+        ]
+
+        const result = filterPokemonList('MEW', pokemonList)
+
+        expect(result).toEqual([
+            { name: 'mew', url: 'url/mew' },
+            { name: 'mewtwo', url: 'url/mewtwo' },
+        ])
+    })
+
+
     it('should return empty pokemonList if ID filter doesnt match', () => {
         const pokemonList = [
             { name: 'abra', url: 'https://pokeapi.co/api/v2/pokemon/2/' },
