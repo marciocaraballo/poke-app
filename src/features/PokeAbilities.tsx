@@ -30,6 +30,7 @@ const PokeAbilities = (props: PokeAbilitiesProps) => {
                 const abilitiesListResponse = await listAbilities()
 
                 setAbilitesList(abilitiesListResponse)
+                setIsApiDown(false)
             } catch (e) {
                 if (e instanceof Response && e.status >= 500) {
                     setIsApiDown(true)
@@ -65,6 +66,7 @@ const PokeAbilities = (props: PokeAbilitiesProps) => {
                             )
 
                             setPokemonList(results)
+                            setIsApiDown(false)
                         } catch (e) {
                             if (e instanceof Response && e.status >= 500) {
                                 setIsApiDown(true)
@@ -75,6 +77,7 @@ const PokeAbilities = (props: PokeAbilitiesProps) => {
                             const pokemonList = await listPokemons()
 
                             setPokemonList(pokemonList)
+                            setIsApiDown(false)
                         } catch (e) {
                             if (e instanceof Response && e.status >= 500) {
                                 setIsApiDown(true)

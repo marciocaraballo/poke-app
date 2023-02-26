@@ -26,6 +26,7 @@ function App() {
 
                 setPokemonList(pokemonList)
                 setPokemonListIsLoading(false)
+                setIsApiDown(false)
             } catch (e) {
                 if (e instanceof Response && e.status >= 500) {
                     setIsApiDown(true)

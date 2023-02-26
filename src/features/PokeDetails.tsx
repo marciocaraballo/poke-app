@@ -37,6 +37,7 @@ const PokeDetailsPanel = (props: PokeDetailsProps) => {
 
                 setPokemonDetails(pokemonDetailsResponse)
                 setPokemonDetailsIsLoading(false)
+                setIsApiDown(false)
             } catch (e) {
                 if (e instanceof Response && e.status >= 500) {
                     setIsApiDown(true)

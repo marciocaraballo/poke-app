@@ -51,7 +51,6 @@ describe('filterPokemonList()', () => {
         ])
     })
 
-
     it('should return empty pokemonList if ID filter doesnt match', () => {
         const pokemonList = [
             { name: 'abra', url: 'https://pokeapi.co/api/v2/pokemon/2/' },

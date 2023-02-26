@@ -12,5 +12,3 @@ Tech stack
 -   E2E testing with playwright
 -   Docker image added
 -   Github actions configured for pull requests to run different jobs
-
-
