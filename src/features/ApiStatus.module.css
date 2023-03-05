@@ -1,7 +1,7 @@
-.api-status--error {
+.error {
     color: red;
 }
 
-.api-status--ok {
+.ok {
     color: green;
 }

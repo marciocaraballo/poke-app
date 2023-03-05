@@ -1,4 +1,4 @@
-import './Spinner.css'
+import styles from './Spinner.module.css'
 
 interface SpinnerProps {
     readonly dataTestId: string
@@ -8,8 +8,8 @@ const Spinner = (props: SpinnerProps) => {
     const { dataTestId } = props
 
     return (
-        <div className="spinner" data-testid={dataTestId}>
-            <div className="spinner_animation"></div>
+        <div className={styles.spinner} data-testid={dataTestId}>
+            <div className={styles.animation}></div>
         </div>
     )
 }

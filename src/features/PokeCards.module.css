@@ -1,9 +1,9 @@
-.poke-cards {
+.cards {
     position: relative;
     flex-basis: 75%;
 }
 
-.poke-cards__grid {
+.grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, 130px);
     gap: 20px;

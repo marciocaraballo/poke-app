@@ -1,4 +1,4 @@
-import './PokeDetails.css'
+import styles from './PokeDetails.module.css'
 
 import { useState, useEffect } from 'react'
 import { getPokemonDetails } from '../utils/fetch'
@@ -53,7 +53,7 @@ const PokeDetailsPanel = (props: PokeDetailsProps) => {
 
     if (!selectedPokemonUrl) {
         return (
-            <aside className="poke-details">
+            <aside className={styles.details}>
                 Please click on a PokeCard from the grid
             </aside>
         )
@@ -61,7 +61,7 @@ const PokeDetailsPanel = (props: PokeDetailsProps) => {
 
     if (pokemonDetailsIsLoading) {
         return (
-            <aside className="poke-details">
+            <aside className={styles.details}>
                 <Spinner dataTestId="poke-details-loading" />
             </aside>
         )
@@ -69,8 +69,8 @@ const PokeDetailsPanel = (props: PokeDetailsProps) => {
 
     if (pokemonDetails.id) {
         return (
-            <aside className="poke-details">
-                <div className="poke-details__panel">
+            <aside className={styles.details}>
+                <div className={styles.panel}>
                     <header>
                         <h2 data-testid="pokemon-details-name">
                             {pokemonDetails.name}

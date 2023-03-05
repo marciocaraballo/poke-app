@@ -1,4 +1,4 @@
-import './App.css'
+import styles from './App.module.css'
 
 import { useState, useEffect } from 'react'
 
@@ -39,11 +39,11 @@ function App() {
     }, [])
 
     return (
-        <div className="poke-app">
-            <header className="poke-header">
+        <div className={styles.app}>
+            <header className={styles.header}>
                 <h1 data-testid="poke-app-welcome">Welcome to PokeApp!</h1>
             </header>
-            <main className="poke-content">
+            <main className={styles.content}>
                 <ApiStatus isApiDown={isApiDown} />
                 <PokeFilters
                     pageSize={pageSize}
@@ -53,7 +53,7 @@ function App() {
                     setPokemonList={setPokemonList}
                     setIsApiDown={setIsApiDown}
                 />
-                <div className="poke-layout">
+                <div className={styles.layout}>
                     <PokeGrid
                         pokemonListIsLoading={pokemonListIsLoading}
                         pageSize={pageSize}
