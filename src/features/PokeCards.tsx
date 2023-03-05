@@ -1,4 +1,4 @@
-import './PokeCards.css'
+import styles from './PokeCards.module.css'
 import { useMemo } from 'react'
 import Card from '../components/Card'
 import { Pokemon } from '../types'
@@ -29,7 +29,7 @@ const PokeCards = (props: PokeCardsProps) => {
 
     if (pokemonListIsLoading) {
         return (
-            <div className="poke-cards">
+            <div className={styles.cards}>
                 <Spinner dataTestId="poke-cards-loading" />
             </div>
         )
@@ -37,15 +37,15 @@ const PokeCards = (props: PokeCardsProps) => {
 
     if (filteredPokemons.length === 0) {
         return (
-            <div className="poke-cards">
+            <div className={styles.cards}>
                 <p>No pokemons are available!</p>
             </div>
         )
     }
 
     return (
-        <div className="poke-cards">
-            <div className="poke-cards__grid">
+        <div className={styles.cards}>
+            <div className={styles.grid}>
                 {filteredPokemons.slice(0, pageSize).map((pokemon) => (
                     <Card
                         dataTestId="poke-card"

@@ -1,4 +1,4 @@
-import './PokeAbilities.css'
+import styles from './PokeAbilities.module.css'
 
 import { useEffect, useState } from 'react'
 import Select, { Value } from '../components/Select'
@@ -42,7 +42,7 @@ const PokeAbilities = (props: PokeAbilitiesProps) => {
     }, [setIsApiDown])
 
     return (
-        <div className="poke-abilities">
+        <div className={styles.abilities}>
             <label htmlFor="abilities">Filter by abilities: </label>
             <Select
                 name="abilities"

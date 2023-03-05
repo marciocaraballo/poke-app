@@ -1,4 +1,4 @@
-.poke-details {
+.details {
     flex-basis: 25%;
     flex-grow: 0;
     flex-shrink: 0;
@@ -10,6 +10,6 @@
     text-transform: capitalize;
 }
 
-.poke-details__panel {
+.panel {
     text-align: center;
 }

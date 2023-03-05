@@ -1,4 +1,4 @@
-import './Card.css'
+import styles from './Card.module.css'
 import PokeBall from '../images/pokeball.png'
 
 interface CardProps {
@@ -15,7 +15,7 @@ const Card = (props: CardProps) => {
         <article
             data-testid={dataTestId}
             role="button"
-            className="card"
+            className={styles.card}
             onClick={() => onCardClick(url)}
         >
             <img src={PokeBall} alt="pokeball" height={100} />

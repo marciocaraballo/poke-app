@@ -1,4 +1,4 @@
-import './InputLabel.css'
+import styles from './InputLabel.module.css'
 
 interface InputLabelProps {
     readonly label: string
@@ -11,10 +11,10 @@ const InputLabel = (props: InputLabelProps) => {
     const { label, value, onChange, placeholder } = props
 
     return (
-        <div className="input-label">
+        <div>
             <span>{label}: </span>
             <input
-                className="input-label__input"
+                className={styles.input}
                 placeholder={placeholder ? placeholder : 'Enter a value'}
                 value={value}
                 onChange={(e) => onChange(e.target.value)}

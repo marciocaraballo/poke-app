@@ -1,4 +1,4 @@
-import './ApiStatus.css'
+import styles from './ApiStatus.module.css'
 
 interface ApiStatusProps {
     readonly isApiDown: boolean
@@ -11,7 +11,7 @@ const ApiStatus = (props: ApiStatusProps) => {
         <span>
             Api status:{' '}
             <span
-                className={isApiDown ? 'api-status--error' : 'api-status--ok'}
+                className={isApiDown ? styles.error : styles.ok}
             >
                 {isApiDown
                     ? 'Red - 500 errors detected. API might be down.'
