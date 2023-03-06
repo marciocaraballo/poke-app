@@ -25,7 +25,7 @@ interface PokemonAbility {
 }
 
 interface PokeDetails {
-    readonly id: string | undefined
+    readonly id: number | undefined
     readonly name: string
     readonly height: number
     readonly weight: number

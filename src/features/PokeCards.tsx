@@ -1,7 +1,7 @@
 import styles from './PokeCards.module.css'
 import { useMemo } from 'react'
 import Card from '../components/Card'
-import { Pokemon } from '../types'
+import { Pokemon } from '../types/app'
 import filterPokemonList from '../utils/filterPokemonList'
 import Spinner from '../components/Spinner'
 

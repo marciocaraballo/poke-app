@@ -1,4 +1,4 @@
-import { Pokemon } from '../types'
+import { Pokemon } from '../types/app'
 
 const filterByPokemonlist = (
     nameOrIdFilter: string,

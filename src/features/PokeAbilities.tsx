@@ -8,7 +8,7 @@ import {
     getPokemonsByAbilities,
 } from '../api/fetch'
 
-import { Ability } from '../types'
+import { Ability } from '../types/app'
 import toast from 'react-hot-toast'
 
 interface PokeAbilitiesProps {
