@@ -48,6 +48,7 @@ describe('fetchUtils', () => {
                             back_default: 'back_default',
                         },
                         abilities: [],
+                        types: [],
                     }),
                 ok: 'OK',
             })

@@ -1,11 +1,13 @@
-interface Pokemon {
+interface NamedResource {
     readonly name: string
     readonly url: string
 }
 
-interface Ability {
+type Pokemon = NamedResource
+type Ability = NamedResource
+
+interface PokemonType {
     readonly name: string
-    readonly url: string
 }
 
 interface ApiResponse<ResultType> {
@@ -36,6 +38,7 @@ interface PokeDetails {
         | string
         | null /** Some pokemons don't have images associated */
     abilities: ReadonlyArray<PokemonAbility>
+    types: ReadonlyArray<PokemonType>
 }
 
 interface AbilityPokemons {
@@ -52,4 +55,5 @@ export type {
     PokeDetails,
     AbilityPokemons,
     AbilityListResponse,
+    PokemonType,
 }
