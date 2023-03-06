@@ -16,12 +16,12 @@ interface PokeAbilitiesProps {
     readonly setPokemonList: Function
 }
 
+const MAX_OPTIONS_LIMIT = 20
+
 const PokeAbilities = (props: PokeAbilitiesProps) => {
     const { setIsApiDown, setPokemonList } = props
 
-    const [abilitiesFilterOptions, setAbilitiesFilterOptions] = useState<Value>(
-        []
-    )
+    const [selectedAbilities, setSelectedAbilities] = useState<Value>([])
 
     const [abilitiesList, setAbilitesList] = useState<Array<Ability>>([])
 
@@ -43,15 +43,25 @@ const PokeAbilities = (props: PokeAbilitiesProps) => {
         fetchAbilitiesList()
     }, [setIsApiDown])
 
+    const remainingAbilities = abilitiesList
+        .filter((ability) => {
+            return (
+                selectedAbilities.find((option) => {
+                    return option.label === ability.name
+                }) === undefined
+            )
+        })
+        .slice(0, MAX_OPTIONS_LIMIT)
+
     return (
         <div className={styles.abilities}>
             <label htmlFor="abilities">Filter by abilities: </label>
             <Select
                 name="abilities"
                 placeholder="Enter abilities"
-                value={abilitiesFilterOptions}
-                onChange={(options) => setAbilitiesFilterOptions(options)}
-                options={abilitiesList.map((ability) => ({
+                value={selectedAbilities}
+                onChange={(options) => setSelectedAbilities(options)}
+                options={remainingAbilities.map((ability) => ({
                     value: ability.name,
                     label: ability.name,
                 }))}
@@ -59,10 +69,10 @@ const PokeAbilities = (props: PokeAbilitiesProps) => {
             <button
                 data-testid="apply-button"
                 onClick={async () => {
-                    if (abilitiesFilterOptions.length !== 0) {
+                    if (selectedAbilities.length !== 0) {
                         try {
                             const results = await getPokemonsByAbilities(
-                                abilitiesFilterOptions.map(
+                                selectedAbilities.map(
                                     (abilityOption) => abilityOption.value
                                 )
                             )
