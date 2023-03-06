@@ -2,21 +2,26 @@ import styles from './ApiStatus.module.css'
 
 interface ApiStatusProps {
     readonly isApiDown: boolean
+    readonly isOnline: boolean
 }
 
 const ApiStatus = (props: ApiStatusProps) => {
-    const { isApiDown } = props
+    const { isApiDown, isOnline } = props
+
+    const statusStyle = !isOnline
+        ? styles.warning
+        : isApiDown
+        ? styles.error
+        : styles.ok
+    const statusMessage = !isOnline
+        ? 'You seem to be offline.'
+        : isApiDown
+        ? 'Red - 500 errors detected. API might be down.'
+        : 'Green - API working.'
 
     return (
         <span>
-            Api status:{' '}
-            <span
-                className={isApiDown ? styles.error : styles.ok}
-            >
-                {isApiDown
-                    ? 'Red - 500 errors detected. API might be down.'
-                    : 'Green - API working.'}
-            </span>
+            Api status: <span className={statusStyle}>{statusMessage}</span>
         </span>
     )
 }
