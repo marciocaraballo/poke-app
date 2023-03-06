@@ -6,9 +6,9 @@ import {
     listAbilities,
     listPokemons,
     getPokemonsByAbilities,
-} from '../utils/fetch'
+} from '../api/fetch'
 
-jest.mock('../utils/fetch')
+jest.mock('../api/fetch')
 
 const mockListAbilities = listAbilities as jest.MockedFunction<
     typeof listAbilities

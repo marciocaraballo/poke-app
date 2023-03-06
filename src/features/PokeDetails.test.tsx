@@ -1,9 +1,9 @@
 import { render, screen, waitFor } from '@testing-library/react'
 import PokeDetailsPanel, { PokeDetailsProps } from './PokeDetails'
-import { getPokemonDetails } from '../utils/fetch'
+import { getPokemonDetails } from '../api/fetch'
 import { PokeDetails } from '../types'
 
-jest.mock('../utils/fetch')
+jest.mock('../api/fetch')
 
 const mockGetPokemonDetails = getPokemonDetails as jest.MockedFunction<
     typeof getPokemonDetails
