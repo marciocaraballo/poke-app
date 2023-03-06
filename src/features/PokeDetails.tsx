@@ -3,7 +3,7 @@ import styles from './PokeDetails.module.css'
 import { useState, useEffect } from 'react'
 import { getPokemonDetails } from '../api/fetch'
 
-import { PokeDetails } from '../types'
+import { PokeDetails } from '../types/app'
 import Spinner from '../components/Spinner'
 import toast from 'react-hot-toast'
 

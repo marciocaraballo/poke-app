@@ -5,7 +5,9 @@ import {
     AbilityPokemons,
     AbilityListResponse,
     Ability,
-} from '../types'
+} from '../types/app'
+
+import { AbilityResponse, PokemonResponse } from '../types/api'
 
 import cacheStore from './cacheStore'
 
@@ -60,17 +62,8 @@ const listPokemons = async () => {
     return response.results
 }
 
-/**
- * Response object is quite complex and returns many information pieces that
- * are not going to be used across the app. The idea is to shape the result
- * into something easier to consume. We define response as "any" to avoid
- * adding lots of types just to support the expected response type.
- *
- * @param url string
- * @returns Promise<PokeDetails>
- */
 const getPokemonDetails = async (url: string): Promise<PokeDetails> => {
-    const response = await fetchUtil<any>('GET', url)
+    const response = await fetchUtil<PokemonResponse>('GET', url)
 
     const abilities: Array<PokemonAbility> = response.abilities
 
@@ -96,7 +89,7 @@ const getPokemonDetails = async (url: string): Promise<PokeDetails> => {
  * @returns Promise<Pokemon>
  */
 const getPokemonsByAbility = async (abilityName: string) => {
-    const ability = await fetchUtil<any>(
+    const ability = await fetchUtil<AbilityResponse>(
         'GET',
         buildUrlWithHostname(`/ability/${abilityName}`)
     )

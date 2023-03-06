@@ -7,7 +7,7 @@ import PokeFilters from './features/PokeFilters'
 import PokeGrid from './features/PokeCards'
 import PokeDetails from './features/PokeDetails'
 import { listPokemons } from './api/fetch'
-import { Pokemon } from './types'
+import { Pokemon } from './types/app'
 import toast, { Toaster } from 'react-hot-toast'
 
 function App() {

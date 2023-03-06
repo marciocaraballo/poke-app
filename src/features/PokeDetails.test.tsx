@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react'
 import PokeDetailsPanel, { PokeDetailsProps } from './PokeDetails'
 import { getPokemonDetails } from '../api/fetch'
-import { PokeDetails } from '../types'
+import { PokeDetails } from '../types/app'
 
 jest.mock('../api/fetch')
 
@@ -31,7 +31,7 @@ describe('<PokeDetailsPanel/>', () => {
 
     it('should show pokemon details', async () => {
         const pokeDetails: PokeDetails = {
-            id: 'id',
+            id: 1,
             name: 'pikachu',
             height: 10,
             weight: 10,
@@ -57,7 +57,7 @@ describe('<PokeDetailsPanel/>', () => {
 
     it('should call setIsApiDown(false) when API call was successful', async () => {
         const pokeDetails: PokeDetails = {
-            id: 'id',
+            id: 1,
             name: 'pikachu',
             height: 10,
             weight: 10,
@@ -83,7 +83,7 @@ describe('<PokeDetailsPanel/>', () => {
 
     it('should show pokemon abilities', async () => {
         const pokeDetails: PokeDetails = {
-            id: 'id',
+            id: 1,
             name: 'pikachu',
             height: 10,
             weight: 10,
@@ -109,7 +109,7 @@ describe('<PokeDetailsPanel/>', () => {
 
     it('should show pokemon height with expected format', async () => {
         const pokeDetails: PokeDetails = {
-            id: 'id',
+            id: 1,
             name: 'pikachu',
             height: 15,
             weight: 15,
@@ -135,7 +135,7 @@ describe('<PokeDetailsPanel/>', () => {
 
     it('should show pokemon weight with expected format', async () => {
         const pokeDetails: PokeDetails = {
-            id: 'id',
+            id: 1,
             name: 'pikachu',
             height: 15,
             weight: 15,
