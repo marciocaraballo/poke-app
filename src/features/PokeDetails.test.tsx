@@ -107,6 +107,58 @@ describe('<PokeDetailsPanel/>', () => {
         })
     })
 
+    it('should show pokemon height with expected format', async () => {
+        const pokeDetails: PokeDetails = {
+            id: 'id',
+            name: 'pikachu',
+            height: 15,
+            weight: 15,
+            frontImageUrl: 'frontImageUrl',
+            backImageUrl: 'backImageUrl',
+            abilities: [
+                {
+                    ability: { name: 'ability', url: 'url/ability' },
+                    is_hidden: false,
+                    slot: 1,
+                },
+            ],
+        }
+
+        await mockGetPokemonDetails.mockResolvedValue(pokeDetails)
+
+        render(<PokeDetailsPanel {...props} selectedPokemonUrl="url/abra" />)
+
+        await waitFor(() => {
+            expect(screen.getByText('150 cm')).toBeInTheDocument()
+        })
+    })
+
+    it('should show pokemon weight with expected format', async () => {
+        const pokeDetails: PokeDetails = {
+            id: 'id',
+            name: 'pikachu',
+            height: 15,
+            weight: 15,
+            frontImageUrl: 'frontImageUrl',
+            backImageUrl: 'backImageUrl',
+            abilities: [
+                {
+                    ability: { name: 'ability', url: 'url/ability' },
+                    is_hidden: false,
+                    slot: 1,
+                },
+            ],
+        }
+
+        await mockGetPokemonDetails.mockResolvedValue(pokeDetails)
+
+        render(<PokeDetailsPanel {...props} selectedPokemonUrl="url/abra" />)
+
+        await waitFor(() => {
+            expect(screen.getByText('1.5 kg')).toBeInTheDocument()
+        })
+    })
+
     it('should show a message if data fails to load from API', async () => {
         await mockGetPokemonDetails.mockRejectedValue({
             id: undefined,
