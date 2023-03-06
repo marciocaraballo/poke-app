@@ -4,6 +4,7 @@ import { listPokemons } from './utils/fetch'
 
 jest.mock('./utils/fetch')
 jest.mock('./features/PokeFilters', () => () => 'PokeAbilities')
+jest.mock('react-hot-toast')
 
 const mockListPokemon = listPokemons as jest.MockedFunction<typeof listPokemons>
 

@@ -9,6 +9,7 @@ import {
 } from '../utils/fetch'
 
 import { Ability } from '../types'
+import toast from 'react-hot-toast'
 
 interface PokeAbilitiesProps {
     readonly setIsApiDown: Function
@@ -35,6 +36,7 @@ const PokeAbilities = (props: PokeAbilitiesProps) => {
                 if (e instanceof Response && e.status >= 500) {
                     setIsApiDown(true)
                 }
+                toast.error('Something went wrong with API call')
             }
         }
 
@@ -71,6 +73,7 @@ const PokeAbilities = (props: PokeAbilitiesProps) => {
                             if (e instanceof Response && e.status >= 500) {
                                 setIsApiDown(true)
                             }
+                            toast.error('Something went wrong with API call')
                         }
                     } else {
                         try {
@@ -82,6 +85,7 @@ const PokeAbilities = (props: PokeAbilitiesProps) => {
                             if (e instanceof Response && e.status >= 500) {
                                 setIsApiDown(true)
                             }
+                            toast.error('Something went wrong with API call')
                         }
                     }
                 }}
