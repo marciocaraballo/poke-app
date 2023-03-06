@@ -7,9 +7,13 @@ import {
     Ability,
 } from '../types'
 
-import findUniquePokemon from './findUniquePokemons'
+import cacheStore from './cacheStore'
+
+import findUniquePokemon from '../utils/findUniquePokemons'
 
 const buildUrlWithHostname = (url: string) => `https://pokeapi.co/api/v2${url}`
+
+const localCacheStore = cacheStore()
 
 /**
  * Small utility to work with browser's fetch API
@@ -25,6 +29,10 @@ const fetchUtil = async <T>(method: string, url: string): Promise<T> => {
         throw new Error(`Unsupported method for API request: ${method}`)
     }
 
+    if (localCacheStore.has(url)) {
+        return localCacheStore.get(url) as T
+    }
+
     let fetchOptions = {
         method,
         headers: {
@@ -35,7 +43,9 @@ const fetchUtil = async <T>(method: string, url: string): Promise<T> => {
     const response = await fetch(url, fetchOptions)
 
     if (response.ok) {
-        return await response.json()
+        const data = await response.json()
+        localCacheStore.put(url, data)
+        return data
     } else {
         return Promise.reject(response)
     }

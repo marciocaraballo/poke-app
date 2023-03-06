@@ -1,7 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import PokeFilters, { PokeFiltersProps } from './PokeFilters'
 
-jest.mock('../utils/fetch')
 jest.mock('./PokeAbilities', () => () => 'PokeAbilities')
 
 describe('<PokeFilters/>', () => {

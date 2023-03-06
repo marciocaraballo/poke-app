@@ -1,8 +1,8 @@
 import { render, screen, waitFor } from '@testing-library/react'
 import App from './App'
-import { listPokemons } from './utils/fetch'
+import { listPokemons } from './api/fetch'
 
-jest.mock('./utils/fetch')
+jest.mock('./api/fetch')
 jest.mock('./features/PokeFilters', () => () => 'PokeAbilities')
 jest.mock('react-hot-toast')
 

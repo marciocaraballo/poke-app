@@ -5,6 +5,12 @@ import {
     listAbilities,
 } from './fetch'
 
+jest.mock('./cacheStore', () => () => ({
+    get: jest.fn(),
+    put: jest.fn(),
+    has: jest.fn(),
+}))
+
 const unmockedFetch = global.fetch
 
 describe('fetchUtils', () => {

@@ -6,7 +6,7 @@ import ApiStatus from './features/ApiStatus'
 import PokeFilters from './features/PokeFilters'
 import PokeGrid from './features/PokeCards'
 import PokeDetails from './features/PokeDetails'
-import { listPokemons } from './utils/fetch'
+import { listPokemons } from './api/fetch'
 import { Pokemon } from './types'
 import toast, { Toaster } from 'react-hot-toast'
 

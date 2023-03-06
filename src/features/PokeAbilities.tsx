@@ -6,7 +6,7 @@ import {
     listAbilities,
     listPokemons,
     getPokemonsByAbilities,
-} from '../utils/fetch'
+} from '../api/fetch'
 
 import { Ability } from '../types'
 import toast from 'react-hot-toast'

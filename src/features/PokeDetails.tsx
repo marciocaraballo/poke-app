@@ -1,7 +1,7 @@
 import styles from './PokeDetails.module.css'
 
 import { useState, useEffect } from 'react'
-import { getPokemonDetails } from '../utils/fetch'
+import { getPokemonDetails } from '../api/fetch'
 
 import { PokeDetails } from '../types'
 import Spinner from '../components/Spinner'
