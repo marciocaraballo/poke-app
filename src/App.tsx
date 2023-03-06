@@ -10,6 +10,7 @@ import { listPokemons } from './utils/fetch'
 import { Pokemon } from './types'
 
 function App() {
+    const [isOnline, setIsOnline] = useState(navigator.onLine)
     const [pokemonListIsLoading, setPokemonListIsLoading] = useState(false)
     const [isApiDown, setIsApiDown] = useState(false)
     const [pokemonList, setPokemonList] = useState<ReadonlyArray<Pokemon>>([])
@@ -38,13 +39,25 @@ function App() {
         fetchPokemonList()
     }, [])
 
+    useEffect(() => {
+        const onOnlineStatusUpdate = () => setIsOnline(navigator.onLine)
+
+        window.addEventListener('online', onOnlineStatusUpdate)
+        window.addEventListener('offline', onOnlineStatusUpdate)
+
+        return () => {
+            window.removeEventListener('online', onOnlineStatusUpdate)
+            window.removeEventListener('offline', onOnlineStatusUpdate)
+        }
+    }, [])
+
     return (
         <div className={styles.app}>
             <header className={styles.header}>
                 <h1 data-testid="poke-app-welcome">Welcome to PokeApp!</h1>
             </header>
             <main className={styles.content}>
-                <ApiStatus isApiDown={isApiDown} />
+                <ApiStatus isApiDown={isApiDown} isOnline={isOnline} />
                 <PokeFilters
                     pageSize={pageSize}
                     setPageSize={setPageSize}
