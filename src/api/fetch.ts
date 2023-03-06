@@ -5,6 +5,7 @@ import {
     AbilityPokemons,
     AbilityListResponse,
     Ability,
+    PokemonType,
 } from '../types/app'
 
 import { AbilityResponse, PokemonResponse } from '../types/api'
@@ -66,6 +67,9 @@ const getPokemonDetails = async (url: string): Promise<PokeDetails> => {
     const response = await fetchUtil<PokemonResponse>('GET', url)
 
     const abilities: Array<PokemonAbility> = response.abilities
+    const types: Array<PokemonType> = response.types.map((pokemonType) => ({
+        name: pokemonType.type.name,
+    }))
 
     const shapedResponse = {
         id: response.id,
@@ -74,7 +78,8 @@ const getPokemonDetails = async (url: string): Promise<PokeDetails> => {
         weight: response.weight,
         frontImageUrl: response.sprites.front_default,
         backImageUrl: response.sprites.back_default,
-        abilities: abilities,
+        abilities,
+        types,
     }
 
     return shapedResponse

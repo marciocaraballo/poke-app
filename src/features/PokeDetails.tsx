@@ -28,6 +28,7 @@ const PokeDetailsPanel = (props: PokeDetailsProps) => {
         frontImageUrl: null,
         backImageUrl: null,
         abilities: [],
+        types: [],
     })
 
     useEffect(() => {
@@ -117,6 +118,12 @@ const PokeDetailsPanel = (props: PokeDetailsProps) => {
                                     (pokemonAbility) =>
                                         pokemonAbility.ability.name
                                 )
+                                .join(', ')}
+                        </p>
+                        <p className={styles.listItem}>
+                            <strong>Types: </strong>{' '}
+                            {pokemonDetails.types
+                                .map((pokemonType) => pokemonType.name)
                                 .join(', ')}
                         </p>
                     </div>

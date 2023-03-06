@@ -44,6 +44,7 @@ describe('<PokeDetailsPanel/>', () => {
                     slot: 1,
                 },
             ],
+            types: [{ name: 'grass' }, { name: 'water' }],
         }
 
         await mockGetPokemonDetails.mockResolvedValue(pokeDetails)
@@ -70,6 +71,7 @@ describe('<PokeDetailsPanel/>', () => {
                     slot: 1,
                 },
             ],
+            types: [{ name: 'grass' }, { name: 'water' }],
         }
 
         await mockGetPokemonDetails.mockResolvedValue(pokeDetails)
@@ -96,6 +98,7 @@ describe('<PokeDetailsPanel/>', () => {
                     slot: 1,
                 },
             ],
+            types: [{ name: 'grass' }, { name: 'water' }],
         }
 
         await mockGetPokemonDetails.mockResolvedValue(pokeDetails)
@@ -104,6 +107,33 @@ describe('<PokeDetailsPanel/>', () => {
 
         await waitFor(() => {
             expect(screen.getByText('ability')).toBeInTheDocument()
+        })
+    })
+
+    it('should show pokemon types', async () => {
+        const pokeDetails: PokeDetails = {
+            id: 1,
+            name: 'pikachu',
+            height: 10,
+            weight: 10,
+            frontImageUrl: 'frontImageUrl',
+            backImageUrl: 'backImageUrl',
+            abilities: [
+                {
+                    ability: { name: 'ability', url: 'url/ability' },
+                    is_hidden: false,
+                    slot: 1,
+                },
+            ],
+            types: [{ name: 'grass' }],
+        }
+
+        await mockGetPokemonDetails.mockResolvedValue(pokeDetails)
+
+        render(<PokeDetailsPanel {...props} selectedPokemonUrl="url/abra" />)
+
+        await waitFor(() => {
+            expect(screen.getByText('grass')).toBeInTheDocument()
         })
     })
 
@@ -122,6 +152,7 @@ describe('<PokeDetailsPanel/>', () => {
                     slot: 1,
                 },
             ],
+            types: [{ name: 'grass' }, { name: 'water' }],
         }
 
         await mockGetPokemonDetails.mockResolvedValue(pokeDetails)
@@ -148,6 +179,7 @@ describe('<PokeDetailsPanel/>', () => {
                     slot: 1,
                 },
             ],
+            types: [{ name: 'grass' }, { name: 'water' }],
         }
 
         await mockGetPokemonDetails.mockResolvedValue(pokeDetails)
@@ -168,6 +200,7 @@ describe('<PokeDetailsPanel/>', () => {
             frontImageUrl: null,
             backImageUrl: null,
             abilities: [],
+            types: [],
         })
 
         render(<PokeDetailsPanel {...props} selectedPokemonUrl="url/abra" />)
