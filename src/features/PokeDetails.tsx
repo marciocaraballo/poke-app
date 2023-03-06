@@ -5,6 +5,7 @@ import { getPokemonDetails } from '../utils/fetch'
 
 import { PokeDetails } from '../types'
 import Spinner from '../components/Spinner'
+import toast from 'react-hot-toast'
 
 interface PokeDetailsProps {
     readonly selectedPokemonUrl: string | undefined
@@ -43,6 +44,7 @@ const PokeDetailsPanel = (props: PokeDetailsProps) => {
                     setIsApiDown(true)
                 }
                 setPokemonDetailsIsLoading(false)
+                toast.error('Something went wrong with API call')
             }
         }
 

@@ -8,6 +8,7 @@ import PokeGrid from './features/PokeCards'
 import PokeDetails from './features/PokeDetails'
 import { listPokemons } from './utils/fetch'
 import { Pokemon } from './types'
+import toast, { Toaster } from 'react-hot-toast'
 
 function App() {
     const [isOnline, setIsOnline] = useState(navigator.onLine)
@@ -33,6 +34,7 @@ function App() {
                     setIsApiDown(true)
                 }
                 setPokemonListIsLoading(false)
+                toast.error('Something went wrong with API call')
             }
         }
 
@@ -80,6 +82,7 @@ function App() {
                     />
                 </div>
             </main>
+            <Toaster position="bottom-center" reverseOrder={false} />
         </div>
     )
 }
