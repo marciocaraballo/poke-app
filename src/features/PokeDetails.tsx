@@ -12,6 +12,9 @@ interface PokeDetailsProps {
     readonly setIsApiDown: Function
 }
 
+const HG_TO_KG_CONV = 0.1
+const DM_TO_CM_CONV = 10
+
 const PokeDetailsPanel = (props: PokeDetailsProps) => {
     const { selectedPokemonUrl, setIsApiDown } = props
 
@@ -95,17 +98,19 @@ const PokeDetailsPanel = (props: PokeDetailsProps) => {
                             </>
                         )}
                     </div>
-                    <div>
-                        <p>
+                    <div className={styles.list}>
+                        <p className={styles.listItem}>
                             <strong>ID: </strong> {pokemonDetails.id}
                         </p>
-                        <p>
-                            <strong>Height: </strong> {pokemonDetails.height}
+                        <p className={styles.listItem}>
+                            <strong>Height: </strong>{' '}
+                            {pokemonDetails.height * DM_TO_CM_CONV} cm
                         </p>
-                        <p>
-                            <strong>Weight: </strong> {pokemonDetails.weight}
+                        <p className={styles.listItem}>
+                            <strong>Weight: </strong>{' '}
+                            {pokemonDetails.weight * HG_TO_KG_CONV} kg
                         </p>
-                        <p>
+                        <p className={styles.listItem}>
                             <strong>Abilities: </strong>{' '}
                             {pokemonDetails.abilities
                                 .map(
