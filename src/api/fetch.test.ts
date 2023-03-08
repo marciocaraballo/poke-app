@@ -101,6 +101,54 @@ describe('fetchUtils', () => {
         )
     })
 
+    it('should reject with an error message', async () => {
+        expect.assertions(1)
+
+        global.fetch = jest.fn(() =>
+            Promise.resolve({
+                json: () => Promise.resolve({ test: 100 }),
+                ok: undefined,
+                status: 500,
+            })
+        ) as jest.Mock
+
+        let errorMsg = ''
+
+        try {
+            await listPokemons()
+        } catch (e) {
+            if (e instanceof Error) {
+                errorMsg = e.message
+            }
+        }
+
+        expect(errorMsg).toEqual('Something went wrong with the request')
+    })
+
+    it('should reject with a status code', async () => {
+        expect.assertions(1)
+
+        global.fetch = jest.fn(() =>
+            Promise.resolve({
+                json: () => Promise.resolve({ test: 100 }),
+                ok: undefined,
+                status: 500,
+            })
+        ) as jest.Mock
+
+        let cause
+
+        try {
+            await listPokemons()
+        } catch (e) {
+            if (e instanceof Error) {
+                cause = e.cause
+            }
+        }
+
+        expect(cause).toEqual(500)
+    })
+
     afterAll(() => {
         global.fetch = unmockedFetch
     })

@@ -13,6 +13,7 @@ describe('<PokeCards/>', () => {
 
     beforeEach(() => {
         jest.resetModules()
+        jest.resetAllMocks()
 
         props = {
             nameOrIdFilter: '',
