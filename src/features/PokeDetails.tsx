@@ -134,7 +134,7 @@ const PokeDetailsPanel = (props: PokeDetailsProps) => {
         )
     }
 
-    return <aside className="poke-details">No data available</aside>
+    return <aside className={styles.details}>No data available</aside>
 }
 
 export default PokeDetailsPanel
