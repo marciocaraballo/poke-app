@@ -21,7 +21,7 @@ describe('<PokeDetailsPanel/>', () => {
         toast.error = jest.fn()
 
         props = {
-            selectedPokemonUrl: undefined,
+            selectedPokemonUrl: '',
             setIsApiDown: jest.fn(),
         }
     })

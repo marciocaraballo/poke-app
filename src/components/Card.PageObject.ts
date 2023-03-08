@@ -2,7 +2,7 @@ import { Locator } from '@playwright/test'
 
 interface CardPageObject {
     readonly getName: () => Promise<string>
-    readonly click: Function
+    readonly click: () => void
 }
 
 const CardPO = (card: Locator): CardPageObject => {

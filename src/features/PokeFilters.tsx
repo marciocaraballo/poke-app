@@ -1,13 +1,15 @@
 import InputLabel from '../components/InputLabel'
 import PokeAbilities from './PokeAbilities'
 
+import { SetIsApiDown, SetPokemonList } from '../types/functions'
+
 interface PokeFiltersProps {
     readonly pageSize: number
     readonly nameOrIdFilter: string
-    readonly setNameOrIdFilter: Function
-    readonly setPageSize: Function
-    readonly setPokemonList: Function
-    readonly setIsApiDown: Function
+    readonly setNameOrIdFilter: (nameOrIdFilter: string) => void
+    readonly setPageSize: (pageSize: number) => void
+    readonly setPokemonList: SetPokemonList
+    readonly setIsApiDown: SetIsApiDown
 }
 
 const PokeFilters = (props: PokeFiltersProps) => {

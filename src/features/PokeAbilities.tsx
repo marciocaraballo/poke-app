@@ -8,12 +8,14 @@ import {
     getPokemonsByAbilities,
 } from '../api/fetch'
 
+import { SetIsApiDown, SetPokemonList } from '../types/functions'
+
 import { Ability } from '../types/app'
 import toast from 'react-hot-toast'
 
 interface PokeAbilitiesProps {
-    readonly setIsApiDown: Function
-    readonly setPokemonList: Function
+    readonly setIsApiDown: SetIsApiDown
+    readonly setPokemonList: SetPokemonList
 }
 
 const MAX_OPTIONS_LIMIT = 20

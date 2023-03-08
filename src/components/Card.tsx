@@ -4,7 +4,7 @@ import PokeBall from '../images/pokeball.png'
 interface CardProps {
     readonly name: string
     readonly url: string
-    readonly onCardClick: Function
+    readonly onCardClick: (url: string) => void
     readonly dataTestId: string
 }
 

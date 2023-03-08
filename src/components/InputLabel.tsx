@@ -3,7 +3,7 @@ import styles from './InputLabel.module.css'
 interface InputLabelProps {
     readonly label: string
     readonly value: string
-    readonly onChange: Function
+    readonly onChange: (value: string) => void
     readonly placeholder?: string
 }
 

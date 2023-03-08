@@ -7,9 +7,11 @@ import { PokeDetails } from '../types/app'
 import Spinner from '../components/Spinner'
 import toast from 'react-hot-toast'
 
+import { SetIsApiDown } from '../types/functions'
+
 interface PokeDetailsProps {
-    readonly selectedPokemonUrl: string | undefined
-    readonly setIsApiDown: Function
+    readonly selectedPokemonUrl: string
+    readonly setIsApiDown: SetIsApiDown
 }
 
 const HG_TO_KG_CONV = 0.1
@@ -52,7 +54,7 @@ const PokeDetailsPanel = (props: PokeDetailsProps) => {
             }
         }
 
-        if (selectedPokemonUrl) {
+        if (selectedPokemonUrl !== '') {
             fetchPokemonDetails(selectedPokemonUrl)
         }
     }, [selectedPokemonUrl, setIsApiDown])
