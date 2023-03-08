@@ -12,3 +12,20 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+
+:root {
+    --spacing-s: 4px;
+    --spacing-m: 8px;
+    --spacing-l: 16px;
+
+    --color-gray: gray;
+    --color-lightgray: lightgray;
+    --color-black: black;
+    --color-white: white;
+    --color-red: red;
+    --color-green: green;
+    --color-orange: orange;
+
+    --header-height: 85px;
+    --filters-height: 118px;
+}
