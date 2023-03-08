@@ -50,7 +50,11 @@ const fetchUtil = async <T>(method: string, url: string): Promise<T> => {
         localCacheStore.put(url, data)
         return data
     } else {
-        return Promise.reject(response)
+        return Promise.reject(
+            new Error('Something went wrong with the request', {
+                cause: response.status,
+            })
+        )
     }
 }
 

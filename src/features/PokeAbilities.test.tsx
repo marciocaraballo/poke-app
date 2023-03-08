@@ -1,6 +1,7 @@
 import selectEvent from 'react-select-event'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import PokeAbilities, { PokeAbilitiesProps } from './PokeAbilities'
+import toast from 'react-hot-toast'
 
 import {
     listAbilities,
@@ -9,6 +10,7 @@ import {
 } from '../api/fetch'
 
 jest.mock('../api/fetch')
+jest.mock('react-hot-toast')
 
 const mockListAbilities = listAbilities as jest.MockedFunction<
     typeof listAbilities
@@ -24,6 +26,9 @@ describe('<PokeAbilities/>', () => {
 
     beforeEach(() => {
         jest.resetModules()
+        jest.resetAllMocks()
+
+        toast.error = jest.fn()
 
         props = {
             setIsApiDown: jest.fn(),
@@ -302,6 +307,32 @@ describe('<PokeAbilities/>', () => {
 
         await waitFor(() => {
             expect(props.setIsApiDown).toHaveBeenCalledWith(false)
+        })
+    })
+
+    it('should call toast.error() when listAbilities() rejects', async () => {
+        await mockListAbilities.mockRejectedValue(
+            new Error('Something went wrong', { cause: 500 })
+        )
+
+        render(<PokeAbilities {...props} />)
+
+        await waitFor(() => {
+            expect(toast.error).toHaveBeenCalledWith(
+                'Something went wrong with API call'
+            )
+        })
+    })
+
+    it('should call setIsApiDown(true) when listAbilities() rejects', async () => {
+        await mockListAbilities.mockRejectedValue(
+            new Error('Something went wrong', { cause: 500 })
+        )
+
+        render(<PokeAbilities {...props} />)
+
+        await waitFor(() => {
+            expect(props.setIsApiDown).toHaveBeenCalledWith(true)
         })
     })
 })

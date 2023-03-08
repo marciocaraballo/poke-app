@@ -2,8 +2,10 @@ import { render, screen, waitFor } from '@testing-library/react'
 import PokeDetailsPanel, { PokeDetailsProps } from './PokeDetails'
 import { getPokemonDetails } from '../api/fetch'
 import { PokeDetails } from '../types/app'
+import toast from 'react-hot-toast'
 
 jest.mock('../api/fetch')
+jest.mock('react-hot-toast')
 
 const mockGetPokemonDetails = getPokemonDetails as jest.MockedFunction<
     typeof getPokemonDetails
@@ -14,6 +16,9 @@ describe('<PokeDetailsPanel/>', () => {
 
     beforeEach(() => {
         jest.resetModules()
+        jest.resetAllMocks()
+
+        toast.error = jest.fn()
 
         props = {
             selectedPokemonUrl: undefined,
@@ -80,6 +85,44 @@ describe('<PokeDetailsPanel/>', () => {
 
         await waitFor(() => {
             expect(props.setIsApiDown).toHaveBeenCalledWith(false)
+        })
+    })
+
+    it('should call setIsApiDown(true) when API call was rejected', async () => {
+        await mockGetPokemonDetails.mockRejectedValue(
+            new Error('Something went wrong', { cause: 500 })
+        )
+
+        render(<PokeDetailsPanel {...props} selectedPokemonUrl="url/abra" />)
+
+        await waitFor(() => {
+            expect(props.setIsApiDown).toHaveBeenCalledWith(true)
+        })
+    })
+
+    it('should show a message if data fails to load from API', async () => {
+        await mockGetPokemonDetails.mockRejectedValue(
+            new Error('Something went wrong', { cause: 500 })
+        )
+
+        render(<PokeDetailsPanel {...props} selectedPokemonUrl="url/abra" />)
+
+        await waitFor(() => {
+            expect(screen.getByText('No data available')).toBeInTheDocument()
+        })
+    })
+
+    it('should call toast.error when rejecting api call', async () => {
+        await mockGetPokemonDetails.mockRejectedValue(
+            new Error('Something went wrong', { cause: 500 })
+        )
+
+        render(<PokeDetailsPanel {...props} selectedPokemonUrl="url/abra" />)
+
+        await waitFor(() => {
+            expect(toast.error).toHaveBeenCalledWith(
+                'Something went wrong with API call'
+            )
         })
     })
 
@@ -191,22 +234,30 @@ describe('<PokeDetailsPanel/>', () => {
         })
     })
 
-    it('should show a message if data fails to load from API', async () => {
-        await mockGetPokemonDetails.mockRejectedValue({
-            id: undefined,
-            name: '',
-            height: 0,
-            weight: 0,
+    it('should show a message when images are not available', async () => {
+        const pokeDetails: PokeDetails = {
+            id: 1,
+            name: 'pikachu',
+            height: 15,
+            weight: 15,
             frontImageUrl: null,
             backImageUrl: null,
-            abilities: [],
-            types: [],
-        })
+            abilities: [
+                {
+                    ability: { name: 'ability', url: 'url/ability' },
+                    is_hidden: false,
+                    slot: 1,
+                },
+            ],
+            types: [{ name: 'grass' }, { name: 'water' }],
+        }
+
+        await mockGetPokemonDetails.mockResolvedValue(pokeDetails)
 
         render(<PokeDetailsPanel {...props} selectedPokemonUrl="url/abra" />)
 
         await waitFor(() => {
-            expect(screen.getByText('No data available')).toBeInTheDocument()
+            expect(screen.getByText('No images available')).toBeInTheDocument()
         })
     })
 })

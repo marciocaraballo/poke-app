@@ -33,7 +33,7 @@ const PokeAbilities = (props: PokeAbilitiesProps) => {
                 setAbilitesList(abilitiesListResponse)
                 setIsApiDown(false)
             } catch (e) {
-                if (e instanceof Response && e.status >= 500) {
+                if (e instanceof Error && (e.cause as number) >= 500) {
                     setIsApiDown(true)
                 }
                 toast.error('Something went wrong with API call')
@@ -80,7 +80,10 @@ const PokeAbilities = (props: PokeAbilitiesProps) => {
                             setPokemonList(results)
                             setIsApiDown(false)
                         } catch (e) {
-                            if (e instanceof Response && e.status >= 500) {
+                            if (
+                                e instanceof Error &&
+                                (e.cause as number) >= 500
+                            ) {
                                 setIsApiDown(true)
                             }
                             toast.error('Something went wrong with API call')
@@ -92,7 +95,10 @@ const PokeAbilities = (props: PokeAbilitiesProps) => {
                             setPokemonList(pokemonList)
                             setIsApiDown(false)
                         } catch (e) {
-                            if (e instanceof Response && e.status >= 500) {
+                            if (
+                                e instanceof Error &&
+                                (e.cause as number) >= 500
+                            ) {
                                 setIsApiDown(true)
                             }
                             toast.error('Something went wrong with API call')

@@ -8,6 +8,7 @@ describe('<PokeFilters/>', () => {
 
     beforeEach(() => {
         jest.resetModules()
+        jest.resetAllMocks()
 
         props = {
             pageSize: 10,
