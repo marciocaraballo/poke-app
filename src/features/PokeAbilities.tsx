@@ -23,6 +23,7 @@ const MAX_OPTIONS_LIMIT = 20
 const PokeAbilities = (props: PokeAbilitiesProps) => {
     const { setIsApiDown, setPokemonList } = props
 
+    const [isLoading, setIsLoading] = useState(false)
     const [selectedAbilities, setSelectedAbilities] = useState<Value>([])
 
     const [abilitiesList, setAbilitesList] = useState<Array<Ability>>([])
@@ -58,19 +59,23 @@ const PokeAbilities = (props: PokeAbilitiesProps) => {
     return (
         <div className={styles.abilities}>
             <label htmlFor="abilities">Filter by abilities: </label>
-            <Select
-                name="abilities"
-                placeholder="Enter abilities"
-                value={selectedAbilities}
-                onChange={(options) => setSelectedAbilities(options)}
-                options={remainingAbilities.map((ability) => ({
-                    value: ability.name,
-                    label: ability.name,
-                }))}
-            />
+            <div data-testid="abilities-select">
+                <Select
+                    name="abilities"
+                    placeholder="Enter abilities"
+                    value={selectedAbilities}
+                    onChange={(options) => setSelectedAbilities(options)}
+                    options={remainingAbilities.map((ability) => ({
+                        value: ability.name,
+                        label: ability.name,
+                    }))}
+                />
+            </div>
             <button
+                disabled={isLoading}
                 data-testid="apply-button"
                 onClick={async () => {
+                    setIsLoading(true)
                     if (selectedAbilities.length !== 0) {
                         try {
                             const results = await getPokemonsByAbilities(
@@ -106,6 +111,8 @@ const PokeAbilities = (props: PokeAbilitiesProps) => {
                             toast.error('Something went wrong with API call')
                         }
                     }
+
+                    setIsLoading(false)
                 }}
             >
                 Apply
