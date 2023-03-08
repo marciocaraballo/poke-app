@@ -10,7 +10,7 @@ import {
 
 import { SetIsApiDown, SetPokemonList } from '../types/functions'
 
-import { Ability, Pokemon } from '../types/app'
+import { Ability } from '../types/app'
 import toast from 'react-hot-toast'
 
 interface PokeAbilitiesProps {
