@@ -6,7 +6,6 @@
     position: relative;
     border-left: 1px solid gray;
     border-top: 1px solid gray;
-    height: 100%;
     text-transform: capitalize;
 }
 
