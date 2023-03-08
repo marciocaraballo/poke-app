@@ -2,10 +2,10 @@
     flex-basis: 25%;
     flex-grow: 0;
     flex-shrink: 0;
-    padding: 10px;
+    padding: var(--spacing-m);
     position: relative;
-    border-left: 1px solid gray;
-    border-top: 1px solid gray;
+    border-left: 1px solid var(--color-gray);
+    border-top: 1px solid var(--color-gray);
     text-transform: capitalize;
 }
 
@@ -14,13 +14,13 @@
 }
 
 .list {
-    border: 1px solid lightgray;
+    border: 1px solid var(--color-lightgray);
 }
 
 .listItem {
-    border-bottom: 1px solid lightgray;
+    border-bottom: 1px solid var(--color-lightgray);
     margin: 0;
-    padding: 10px;
+    padding: var(--spacing-m);
 }
 
 .listItem:last-child {

@@ -1,11 +1,11 @@
 .error {
-    color: red;
+    color: var(--color-red);
 }
 
 .ok {
-    color: green;
+    color: var(--color-green);
 }
 
 .warning {
-    color: orange;
+    color: var(--color-orange);
 }

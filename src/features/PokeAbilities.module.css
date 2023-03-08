@@ -1,5 +1,5 @@
 .abilities {
     display: flex;
     align-items: center;
-    margin-top: 5px;
+    margin-top: var(--spacing-s);
 }
