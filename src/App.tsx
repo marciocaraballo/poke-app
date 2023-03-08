@@ -61,6 +61,8 @@ function App() {
             <main className={styles.content}>
                 <ApiStatus isApiDown={isApiDown} isOnline={isOnline} />
                 <PokeFilters
+                    pokemonListIsLoading={pokemonListIsLoading}
+                    setPokemonListIsLoading={setPokemonListIsLoading}
                     pageSize={pageSize}
                     setPageSize={setPageSize}
                     nameOrIdFilter={nameOrIdFilter}

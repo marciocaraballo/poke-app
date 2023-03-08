@@ -1,7 +1,11 @@
 import InputLabel from '../components/InputLabel'
 import PokeAbilities from './PokeAbilities'
 
-import { SetIsApiDown, SetPokemonList } from '../types/functions'
+import {
+    SetIsApiDown,
+    SetPokemonList,
+    SetPokemonListIsLoading,
+} from '../types/functions'
 
 interface PokeFiltersProps {
     readonly pageSize: number
@@ -10,6 +14,8 @@ interface PokeFiltersProps {
     readonly setPageSize: (pageSize: number) => void
     readonly setPokemonList: SetPokemonList
     readonly setIsApiDown: SetIsApiDown
+    readonly setPokemonListIsLoading: SetPokemonListIsLoading
+    readonly pokemonListIsLoading: boolean
 }
 
 const PokeFilters = (props: PokeFiltersProps) => {
@@ -20,6 +26,8 @@ const PokeFilters = (props: PokeFiltersProps) => {
         setNameOrIdFilter,
         setIsApiDown,
         setPokemonList,
+        setPokemonListIsLoading,
+        pokemonListIsLoading,
     } = props
 
     return (
@@ -45,6 +53,8 @@ const PokeFilters = (props: PokeFiltersProps) => {
                 onChange={(value: string) => setNameOrIdFilter(value)}
             />
             <PokeAbilities
+                pokemonListIsLoading={pokemonListIsLoading}
+                setPokemonListIsLoading={setPokemonListIsLoading}
                 setPokemonList={setPokemonList}
                 setIsApiDown={setIsApiDown}
             />
