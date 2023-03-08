@@ -1,10 +1,11 @@
 import styles from './Card.module.css'
 import PokeBall from '../images/pokeball.png'
+import { Url } from 'url'
 
 interface CardProps {
     readonly name: string
     readonly url: string
-    readonly onCardClick: Function
+    readonly onCardClick: (url: string) => void
     readonly dataTestId: string
 }
 

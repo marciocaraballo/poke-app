@@ -8,7 +8,7 @@ import Spinner from '../components/Spinner'
 interface PokeCardsProps {
     readonly nameOrIdFilter: string
     pokemonList: ReadonlyArray<Pokemon>
-    readonly setSelectedPokemonUrl: Function
+    readonly setSelectedPokemonUrl: (url: string) => void
     readonly pageSize: number
     readonly pokemonListIsLoading: boolean
 }

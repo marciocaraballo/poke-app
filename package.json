@@ -56,7 +56,9 @@
     "jest": {
         "collectCoverageFrom": [
             "**/*.{js,jsx,ts,tsx}",
+            "!**/types/**",
             "!**/*e2e.test.{js,jsx,ts,tsx}",
+            "!**/*PageObject.{js,jsx,ts,tsx}",
             "!**/node_modules/**",
             "!**/vendor/**"
         ]
