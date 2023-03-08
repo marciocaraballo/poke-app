@@ -18,16 +18,9 @@ const PokeAbilitiesPO = (page: Page) => {
         await applyButton.click()
     }
 
-    const waitForFinishedLoading = async () => {
-        const applyButton = page.getByRole('button', { name: 'Apply' })
-
-        await applyButton.click({ trial: true })
-    }
-
     return {
         chooseAbility,
         clickApply,
-        waitForFinishedLoading,
     }
 }
 

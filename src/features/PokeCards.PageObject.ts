@@ -2,11 +2,12 @@ import { Locator, Page } from '@playwright/test'
 import CardPO, { CardPageObject } from '../components/Card.PageObject'
 
 const POKE_CARD_TID = 'poke-card'
+const POKE_CARDS_LOADING_TID = 'poke-cards-loading'
 
 const PokeCardsPO = (page: Page) => {
     /** Wait for any card to be visible, so API loaded as expected and cards can be located */
     const waitForACardIsVisibile = async () => {
-        return await page
+        await page
             .locator(`[data-testid=${POKE_CARD_TID}]`)
             .nth(0)
             .waitFor({ state: 'visible' })
@@ -20,7 +21,21 @@ const PokeCardsPO = (page: Page) => {
         return cardPO
     }
 
+    const waitForCardsLoading = async () => {
+        await page
+            .locator(`[data-testid=${POKE_CARDS_LOADING_TID}]`)
+            .waitFor({ state: 'attached' })
+    }
+
+    const waitForCardsFinishedLoading = async () => {
+        await page
+            .locator(`[data-testid=${POKE_CARDS_LOADING_TID}]`)
+            .waitFor({ state: 'detached' })
+    }
+
     return {
+        waitForCardsLoading,
+        waitForCardsFinishedLoading,
         waitForACardIsVisibile,
         getCardByIndex,
     }

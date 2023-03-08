@@ -59,7 +59,9 @@ test.describe('App.e2e.test', () => {
 
         await pokeFiltersPO.clickApply()
 
-        await pokeFiltersPO.waitForFinishedLoading()
+        await pokeCardsPO.waitForCardsLoading()
+
+        await pokeCardsPO.waitForCardsFinishedLoading()
 
         const firstPokemon = pokeCardsPO.getCardByIndex(0)
 

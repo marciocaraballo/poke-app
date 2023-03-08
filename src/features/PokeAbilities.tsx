@@ -8,7 +8,11 @@ import {
     getPokemonsByAbilities,
 } from '../api/fetch'
 
-import { SetIsApiDown, SetPokemonList } from '../types/functions'
+import {
+    SetIsApiDown,
+    SetPokemonList,
+    SetPokemonListIsLoading,
+} from '../types/functions'
 
 import { Ability } from '../types/app'
 import toast from 'react-hot-toast'
@@ -16,14 +20,20 @@ import toast from 'react-hot-toast'
 interface PokeAbilitiesProps {
     readonly setIsApiDown: SetIsApiDown
     readonly setPokemonList: SetPokemonList
+    readonly setPokemonListIsLoading: SetPokemonListIsLoading
+    readonly pokemonListIsLoading: boolean
 }
 
 const MAX_OPTIONS_LIMIT = 20
 
 const PokeAbilities = (props: PokeAbilitiesProps) => {
-    const { setIsApiDown, setPokemonList } = props
+    const {
+        setIsApiDown,
+        setPokemonList,
+        setPokemonListIsLoading,
+        pokemonListIsLoading,
+    } = props
 
-    const [isLoading, setIsLoading] = useState(false)
     const [selectedAbilities, setSelectedAbilities] = useState<Value>([])
 
     const [abilitiesList, setAbilitesList] = useState<Array<Ability>>([])
@@ -72,12 +82,13 @@ const PokeAbilities = (props: PokeAbilitiesProps) => {
                 />
             </div>
             <button
-                disabled={isLoading}
+                disabled={pokemonListIsLoading}
                 data-testid="apply-button"
                 onClick={async () => {
-                    setIsLoading(true)
-                    if (selectedAbilities.length !== 0) {
-                        try {
+                    setPokemonListIsLoading(true)
+
+                    try {
+                        if (selectedAbilities.length !== 0) {
                             const results = await getPokemonsByAbilities(
                                 selectedAbilities.map(
                                     (abilityOption) => abilityOption.value
@@ -86,33 +97,20 @@ const PokeAbilities = (props: PokeAbilitiesProps) => {
 
                             setPokemonList(results)
                             setIsApiDown(false)
-                        } catch (e) {
-                            if (
-                                e instanceof Error &&
-                                (e.cause as number) >= 500
-                            ) {
-                                setIsApiDown(true)
-                            }
-                            toast.error('Something went wrong with API call')
-                        }
-                    } else {
-                        try {
+                        } else {
                             const pokemonList = await listPokemons()
 
                             setPokemonList(pokemonList)
                             setIsApiDown(false)
-                        } catch (e) {
-                            if (
-                                e instanceof Error &&
-                                (e.cause as number) >= 500
-                            ) {
-                                setIsApiDown(true)
-                            }
-                            toast.error('Something went wrong with API call')
                         }
+                    } catch (e) {
+                        if (e instanceof Error && (e.cause as number) >= 500) {
+                            setIsApiDown(true)
+                        }
+                        toast.error('Something went wrong with API call')
                     }
 
-                    setIsLoading(false)
+                    setPokemonListIsLoading(false)
                 }}
             >
                 Apply

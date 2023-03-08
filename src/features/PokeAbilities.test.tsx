@@ -33,6 +33,8 @@ describe('<PokeAbilities/>', () => {
         props = {
             setIsApiDown: jest.fn(),
             setPokemonList: jest.fn(),
+            setPokemonListIsLoading: jest.fn(),
+            pokemonListIsLoading: false,
         }
     })
 
@@ -333,6 +335,86 @@ describe('<PokeAbilities/>', () => {
 
         await waitFor(() => {
             expect(props.setIsApiDown).toHaveBeenCalledWith(true)
+        })
+    })
+
+    it('should call setPokemonListIsLoading(true) when clicking Apply', async () => {
+        await mockListAbilities.mockResolvedValue([
+            {
+                name: 'ability-1',
+                url: 'url/ability-1',
+            },
+            {
+                name: 'ability-2',
+                url: 'url/ability-2',
+            },
+            {
+                name: 'ability-3',
+                url: 'url/ability-3',
+            },
+        ])
+
+        await mockGetPokemonsByAbilities.mockResolvedValue([
+            { name: 'abra', url: 'url/abra' },
+        ])
+
+        render(<PokeAbilities {...props} />)
+
+        fireEvent.change(await screen.findByLabelText('Filter by abilities:'), {
+            target: { value: 'ability' },
+        })
+
+        await selectEvent.select(
+            await screen.findByLabelText('Filter by abilities:'),
+            'ability-2'
+        )
+
+        const apply = screen.getByTestId('apply-button')
+
+        fireEvent.click(apply)
+
+        await waitFor(() => {
+            expect(props.setPokemonListIsLoading).toHaveBeenCalledWith(true)
+        })
+    })
+
+    it('should call setPokemonListIsLoading(false) when api call resolves', async () => {
+        await mockListAbilities.mockResolvedValue([
+            {
+                name: 'ability-1',
+                url: 'url/ability-1',
+            },
+            {
+                name: 'ability-2',
+                url: 'url/ability-2',
+            },
+            {
+                name: 'ability-3',
+                url: 'url/ability-3',
+            },
+        ])
+
+        await mockGetPokemonsByAbilities.mockResolvedValue([
+            { name: 'abra', url: 'url/abra' },
+        ])
+
+        render(<PokeAbilities {...props} />)
+
+        fireEvent.change(await screen.findByLabelText('Filter by abilities:'), {
+            target: { value: 'ability' },
+        })
+
+        await selectEvent.select(
+            await screen.findByLabelText('Filter by abilities:'),
+            'ability-2'
+        )
+
+        const apply = screen.getByTestId('apply-button')
+
+        fireEvent.click(apply)
+
+        await waitFor(() => {
+            expect(props.setPokemonListIsLoading).toHaveBeenCalledWith(false)
         })
     })
 })
