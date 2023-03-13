@@ -17,6 +17,8 @@ import {
 import { Ability } from '../types/app'
 import toast from 'react-hot-toast'
 
+import Button from '../components/Button'
+
 interface PokeAbilitiesProps {
     readonly setIsApiDown: SetIsApiDown
     readonly setPokemonList: SetPokemonList
@@ -113,9 +115,9 @@ const PokeAbilities = (props: PokeAbilitiesProps) => {
                     }))}
                 />
             </div>
-            <input
-                type="submit"
-                value="Apply"
+            <Button
+                variant="submit"
+                text="Apply"
                 disabled={pokemonListIsLoading}
             />
         </form>

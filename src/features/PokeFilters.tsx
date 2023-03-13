@@ -1,3 +1,5 @@
+import styles from './PokeFilters.module.css'
+
 import InputLabel from '../components/InputLabel'
 import PokeAbilities from './PokeAbilities'
 
@@ -6,6 +8,8 @@ import {
     SetPokemonList,
     SetPokemonListIsLoading,
 } from '../types/functions'
+
+import Button from '../components/Button'
 
 interface PokeFiltersProps {
     readonly pageSize: number
@@ -46,12 +50,20 @@ const PokeFilters = (props: PokeFiltersProps) => {
                     <option value={3000}>all</option>
                 </select>
             </div>
-            <InputLabel
-                label="Filter by"
-                placeholder="Enter Pokemon name or ID"
-                value={nameOrIdFilter}
-                onChange={(value: string) => setNameOrIdFilter(value)}
-            />
+            <div className={styles.nameFilter}>
+                <InputLabel
+                    label="Filter by"
+                    placeholder="Enter Pokemon name or ID"
+                    value={nameOrIdFilter}
+                    onChange={(value: string) => setNameOrIdFilter(value)}
+                />
+                <Button
+                    variant="link"
+                    text="Clear"
+                    onClick={() => setNameOrIdFilter('')}
+                    disabled={nameOrIdFilter === ''}
+                />
+            </div>
             <PokeAbilities
                 pokemonListIsLoading={pokemonListIsLoading}
                 setPokemonListIsLoading={setPokemonListIsLoading}

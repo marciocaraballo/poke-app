@@ -41,4 +41,24 @@ describe('<PokeFilters/>', () => {
 
         expect(props.setNameOrIdFilter).toHaveBeenCalledWith('abra')
     })
+
+    it('should call setNameOrIdFilter() with expected params when clicking Clear button', () => {
+        render(<PokeFilters {...props} nameOrIdFilter="nameOrIdFilter" />)
+
+        const button = screen.getByRole('button', { name: 'Clear' })
+
+        fireEvent.click(button)
+
+        expect(props.setNameOrIdFilter).toHaveBeenCalledWith('')
+    })
+
+    it('should set Clear button disabled when nameOrIdFilter is empty string', () => {
+        render(<PokeFilters {...props} nameOrIdFilter="" />)
+
+        const button = screen.getByRole('button', { name: 'Clear' })
+
+        fireEvent.click(button)
+
+        expect(button).toBeDisabled()
+    })
 })

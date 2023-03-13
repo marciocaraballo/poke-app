@@ -1,0 +1,12 @@
+.buttonLink {
+    text-decoration: underline;
+    border-color: transparent;
+    background-color: transparent;
+    color: var(--color-blue);
+    cursor: pointer;
+}
+
+.buttonLink[disabled] {
+    color: var(--color-gray);
+    cursor: not-allowed;
+}
