@@ -10,12 +10,16 @@ import { listPokemons } from './api/fetch'
 import { Pokemon } from './types/app'
 import toast, { Toaster } from 'react-hot-toast'
 
+import { updateURLQueryParams, getURLQueryParams } from './utils/urlUtils'
+
 function App() {
     const [isOnline, setIsOnline] = useState(navigator.onLine)
     const [pokemonListIsLoading, setPokemonListIsLoading] = useState(false)
     const [isApiDown, setIsApiDown] = useState(false)
     const [pokemonList, setPokemonList] = useState<ReadonlyArray<Pokemon>>([])
-    const [nameOrIdFilter, setNameOrIdFilter] = useState('')
+    const [nameOrIdFilter, setNameOrIdFilter] = useState(
+        getURLQueryParams('nameOrId') || ''
+    )
     const [selectedPokemonUrl, setSelectedPokemonUrl] = useState('')
     const [pageSize, setPageSize] = useState(50)
 
@@ -52,6 +56,10 @@ function App() {
             window.removeEventListener('offline', onOnlineStatusUpdate)
         }
     }, [])
+
+    useEffect(() => {
+        updateURLQueryParams('nameOrId', nameOrIdFilter)
+    }, [nameOrIdFilter])
 
     return (
         <div className={styles.app}>

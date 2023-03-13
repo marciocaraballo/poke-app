@@ -2,17 +2,23 @@ import { render, screen, waitFor } from '@testing-library/react'
 import App from './App'
 import { listPokemons } from './api/fetch'
 import toast from 'react-hot-toast'
+import { updateURLQueryParams, getURLQueryParams } from './utils/urlUtils'
 
 jest.mock('./api/fetch')
 jest.mock('./features/PokeFilters', () => () => 'PokeAbilities')
 jest.mock('react-hot-toast')
+jest.mock('./utils/urlUtils');
 
 const mockListPokemon = listPokemons as jest.MockedFunction<typeof listPokemons>
+const mockUpdateURLQueryParams = updateURLQueryParams as jest.MockedFunction<typeof updateURLQueryParams>
+const mockGetURLQueryParams = getURLQueryParams as jest.MockedFunction<typeof getURLQueryParams>
 
 describe('<App/>', () => {
     beforeEach(() => {
         jest.resetModules()
         jest.resetAllMocks()
+
+        mockGetURLQueryParams.mockReturnValue('pikachu');
 
         toast.error = jest.fn()
     })
@@ -22,13 +28,16 @@ describe('<App/>', () => {
             {
                 name: 'abra',
                 url: 'url/abra',
-            },
+            }, {
+                name: 'pikachu',
+                url: 'url/pikachu',
+            }
         ])
 
         render(<App />)
 
         await waitFor(() => {
-            expect(screen.getByText('abra')).toBeInTheDocument()
+            expect(screen.getByText('pikachu')).toBeInTheDocument()
         })
     })
 
@@ -60,5 +69,24 @@ describe('<App/>', () => {
                 )
             ).toBeInTheDocument()
         })
+    })
+
+    it ('should call getURLQueryParams() to retrieve name filter', async () => {
+
+        await mockListPokemon.mockResolvedValue([
+            {
+                name: 'abra',
+                url: 'url/abra',
+            }, {
+                name: 'pikachu',
+                url: 'url/pikachu',
+            }
+        ])
+
+        render(<App />)
+
+        await screen.findByText('pikachu');
+
+        expect(mockGetURLQueryParams).toHaveBeenCalledWith('nameOrId');
     })
 })
