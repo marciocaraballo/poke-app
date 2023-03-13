@@ -87,6 +87,6 @@ describe('<App/>', () => {
 
         await screen.findByText('pikachu');
 
-        expect(mockGetURLQueryParams).toHaveBeenCalledWith('name');
+        expect(mockGetURLQueryParams).toHaveBeenCalledWith('nameOrId');
     })
 })

@@ -18,7 +18,7 @@ function App() {
     const [isApiDown, setIsApiDown] = useState(false)
     const [pokemonList, setPokemonList] = useState<ReadonlyArray<Pokemon>>([])
     const [nameOrIdFilter, setNameOrIdFilter] = useState(
-        getURLQueryParams('name') || ''
+        getURLQueryParams('nameOrId') || ''
     )
     const [selectedPokemonUrl, setSelectedPokemonUrl] = useState('')
     const [pageSize, setPageSize] = useState(50)
@@ -58,7 +58,7 @@ function App() {
     }, [])
 
     useEffect(() => {
-        updateURLQueryParams('name', nameOrIdFilter)
+        updateURLQueryParams('nameOrId', nameOrIdFilter)
     }, [nameOrIdFilter])
 
     return (
