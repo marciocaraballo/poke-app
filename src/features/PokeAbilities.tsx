@@ -67,7 +67,39 @@ const PokeAbilities = (props: PokeAbilitiesProps) => {
         .slice(0, MAX_OPTIONS_LIMIT)
 
     return (
-        <div className={styles.abilities}>
+        <form
+            className={styles.abilities}
+            onSubmit={async (e) => {
+                e.preventDefault()
+
+                setPokemonListIsLoading(true)
+
+                try {
+                    if (selectedAbilities.length !== 0) {
+                        const results = await getPokemonsByAbilities(
+                            selectedAbilities.map(
+                                (abilityOption) => abilityOption.value
+                            )
+                        )
+
+                        setPokemonList(results)
+                        setIsApiDown(false)
+                    } else {
+                        const pokemonList = await listPokemons()
+
+                        setPokemonList(pokemonList)
+                        setIsApiDown(false)
+                    }
+                } catch (e) {
+                    if (e instanceof Error && (e.cause as number) >= 500) {
+                        setIsApiDown(true)
+                    }
+                    toast.error('Something went wrong with API call')
+                }
+
+                setPokemonListIsLoading(false)
+            }}
+        >
             <label htmlFor="abilities">Filter by abilities: </label>
             <div data-testid="abilities-select">
                 <Select
@@ -81,41 +113,12 @@ const PokeAbilities = (props: PokeAbilitiesProps) => {
                     }))}
                 />
             </div>
-            <button
+            <input
+                type="submit"
+                value="Apply"
                 disabled={pokemonListIsLoading}
-                data-testid="apply-button"
-                onClick={async () => {
-                    setPokemonListIsLoading(true)
-
-                    try {
-                        if (selectedAbilities.length !== 0) {
-                            const results = await getPokemonsByAbilities(
-                                selectedAbilities.map(
-                                    (abilityOption) => abilityOption.value
-                                )
-                            )
-
-                            setPokemonList(results)
-                            setIsApiDown(false)
-                        } else {
-                            const pokemonList = await listPokemons()
-
-                            setPokemonList(pokemonList)
-                            setIsApiDown(false)
-                        }
-                    } catch (e) {
-                        if (e instanceof Error && (e.cause as number) >= 500) {
-                            setIsApiDown(true)
-                        }
-                        toast.error('Something went wrong with API call')
-                    }
-
-                    setPokemonListIsLoading(false)
-                }}
-            >
-                Apply
-            </button>
-        </div>
+            />
+        </form>
     )
 }
 

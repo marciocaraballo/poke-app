@@ -95,7 +95,7 @@ describe('<PokeAbilities/>', () => {
             'ability-2'
         )
 
-        const apply = screen.getByTestId('apply-button')
+        const apply = screen.getByText('Apply')
 
         fireEvent.click(apply)
 
@@ -133,7 +133,7 @@ describe('<PokeAbilities/>', () => {
             'ability-2'
         )
 
-        const apply = screen.getByTestId('apply-button')
+        const apply = screen.getByText('Apply')
 
         fireEvent.click(apply)
 
@@ -175,7 +175,7 @@ describe('<PokeAbilities/>', () => {
             'ability-2'
         )
 
-        const apply = screen.getByTestId('apply-button')
+        const apply = screen.getByText('Apply')
 
         fireEvent.click(apply)
 
@@ -215,7 +215,7 @@ describe('<PokeAbilities/>', () => {
             await screen.findByLabelText('Filter by abilities:')
         )
 
-        const apply = screen.getByTestId('apply-button')
+        const apply = screen.getByText('Apply')
 
         fireEvent.click(apply)
 
@@ -257,7 +257,7 @@ describe('<PokeAbilities/>', () => {
             await screen.findByLabelText('Filter by abilities:')
         )
 
-        const apply = screen.getByTestId('apply-button')
+        const apply = screen.getByText('Apply')
 
         fireEvent.click(apply)
 
@@ -303,7 +303,7 @@ describe('<PokeAbilities/>', () => {
             await screen.findByLabelText('Filter by abilities:')
         )
 
-        const apply = screen.getByTestId('apply-button')
+        const apply = screen.getByText('Apply')
 
         fireEvent.click(apply)
 
@@ -369,7 +369,7 @@ describe('<PokeAbilities/>', () => {
             'ability-2'
         )
 
-        const apply = screen.getByTestId('apply-button')
+        const apply = screen.getByText('Apply')
 
         fireEvent.click(apply)
 
@@ -409,7 +409,7 @@ describe('<PokeAbilities/>', () => {
             'ability-2'
         )
 
-        const apply = screen.getByTestId('apply-button')
+        const apply = screen.getByText('Apply')
 
         fireEvent.click(apply)
 
