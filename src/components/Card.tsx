@@ -12,14 +12,25 @@ const Card = (props: CardProps) => {
     const { name, url, onCardClick, dataTestId } = props
 
     return (
-        <article
-            data-testid={dataTestId}
-            role="button"
-            className={styles.card}
-            onClick={() => onCardClick(url)}
-        >
-            <img src={PokeBall} alt="pokeball" height={100} />
-            {name}
+        <article className={styles.card}>
+            <div
+                data-testid={dataTestId}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                        onCardClick(url)
+                    }
+                }}
+                onClick={() => onCardClick(url)}
+            >
+                <img
+                    src={PokeBall}
+                    alt={`PokeCard associated to ${name}`}
+                    height={100}
+                />
+                {name}
+            </div>
         </article>
     )
 }

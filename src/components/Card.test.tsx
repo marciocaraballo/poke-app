@@ -13,10 +13,12 @@ describe('<Card/>', () => {
         }
     })
 
-    it('should render a PokeBall image', () => {
+    it('should render a PokeBall image with an alt text associated to the pokemon', () => {
         render(<Card {...props} />)
 
-        expect(screen.getByAltText('pokeball')).toBeInTheDocument()
+        expect(
+            screen.getByAltText('PokeCard associated to Abra')
+        ).toBeInTheDocument()
     })
 
     it('should render Pokemon name', () => {
@@ -30,6 +32,15 @@ describe('<Card/>', () => {
         const card = screen.getByRole('button')
 
         fireEvent.click(card)
+
+        expect(props.onCardClick).toHaveBeenCalledWith('url/abra')
+    })
+
+    it('should call onCardClick() with expected params onKeyDown with Enter key', () => {
+        render(<Card {...props} />)
+        const card = screen.getByRole('button')
+
+        fireEvent.keyDown(card, { key: 'Enter', code: 'Enter', charCode: 13 })
 
         expect(props.onCardClick).toHaveBeenCalledWith('url/abra')
     })
