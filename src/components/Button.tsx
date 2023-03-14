@@ -21,7 +21,6 @@ const Button = (props: ButtonProps) => {
     if (variant === 'link') {
         return (
             <button
-                name={text}
                 className={styles.buttonLink}
                 onClick={(e) => {
                     if (!disabled && onClick !== undefined) {
