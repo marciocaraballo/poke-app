@@ -1,6 +1,12 @@
 .cards {
     position: relative;
-    flex-basis: 75%;
+    flex-basis: 45%;
+}
+
+@media screen and (min-width: 480px) {
+    .cards {
+        flex-basis: 70%;
+    }
 }
 
 .grid {

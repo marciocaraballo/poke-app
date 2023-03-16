@@ -80,7 +80,10 @@ const PokeDetailsPanel = (props: PokeDetailsProps) => {
             <aside className={styles.details}>
                 <div className={styles.panel}>
                     <header>
-                        <h2 data-testid="pokemon-details-name">
+                        <h2
+                            data-testid="pokemon-details-name"
+                            className={styles.name}
+                        >
                             {pokemonDetails.name}
                         </h2>
                     </header>
@@ -93,10 +96,14 @@ const PokeDetailsPanel = (props: PokeDetailsProps) => {
                                 <img
                                     src={pokemonDetails.frontImageUrl}
                                     alt={pokemonDetails.name}
+                                    height={96}
+                                    width={96}
                                 />
                                 <img
                                     src={pokemonDetails.backImageUrl}
                                     alt={pokemonDetails.name}
+                                    height={96}
+                                    width={96}
                                 />
                             </>
                         )}
