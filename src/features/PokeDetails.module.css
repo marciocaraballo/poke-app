@@ -1,5 +1,5 @@
 .details {
-    flex-basis: 25%;
+    flex-basis: 50%;
     flex-grow: 0;
     flex-shrink: 0;
     padding: var(--spacing-m);
@@ -7,6 +7,12 @@
     border-left: 1px solid var(--color-gray);
     border-top: 1px solid var(--color-gray);
     text-transform: capitalize;
+}
+
+@media screen and (min-width: 480px) {
+    .details {
+        flex-basis: 30%;
+    }
 }
 
 .panel {
