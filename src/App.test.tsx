@@ -22,8 +22,6 @@ describe('<App/>', () => {
         jest.resetModules()
         jest.resetAllMocks()
 
-        mockGetURLQueryParams.mockReturnValue('pikachu')
-
         toast.error = jest.fn()
     })
 
