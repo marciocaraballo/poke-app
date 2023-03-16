@@ -80,7 +80,10 @@ const PokeDetailsPanel = (props: PokeDetailsProps) => {
             <aside className={styles.details}>
                 <div className={styles.panel}>
                     <header>
-                        <h2 data-testid="pokemon-details-name">
+                        <h2
+                            data-testid="pokemon-details-name"
+                            className={styles.name}
+                        >
                             {pokemonDetails.name}
                         </h2>
                     </header>
