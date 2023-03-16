@@ -96,10 +96,14 @@ const PokeDetailsPanel = (props: PokeDetailsProps) => {
                                 <img
                                     src={pokemonDetails.frontImageUrl}
                                     alt={pokemonDetails.name}
+                                    height={96}
+                                    width={96}
                                 />
                                 <img
                                     src={pokemonDetails.backImageUrl}
                                     alt={pokemonDetails.name}
+                                    height={96}
+                                    width={96}
                                 />
                             </>
                         )}
