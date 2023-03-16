@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import PokeFilters, { PokeFiltersProps } from './PokeFilters'
+import selectEvent from 'react-select-event'
 
 jest.mock('./PokeAbilities', () => () => 'PokeAbilities')
 
@@ -11,7 +12,6 @@ describe('<PokeFilters/>', () => {
         jest.resetAllMocks()
 
         props = {
-            pageSize: 10,
             setPageSize: jest.fn(),
             nameOrIdFilter: '',
             setNameOrIdFilter: jest.fn(),
@@ -22,14 +22,19 @@ describe('<PokeFilters/>', () => {
         }
     })
 
-    it('should call setPageSize() with expected params when changing select', () => {
+    it('should call setPageSize() with expected params when changing select', async () => {
         render(<PokeFilters {...props} />)
 
-        const select = screen.getByTestId('page-size-select')
+        fireEvent.change(await screen.findByLabelText('Results to show:'), {
+            target: { value: '' },
+        })
 
-        fireEvent.change(select, { target: { value: '50' } })
+        await selectEvent.select(
+            await screen.findByLabelText('Results to show:'),
+            '100'
+        )
 
-        expect(props.setPageSize).toHaveBeenCalledWith(50)
+        expect(props.setPageSize).toHaveBeenCalledWith(100)
     })
 
     it('should call setNameOrIdFilter() with expected params when changing nameOrFilter input', () => {

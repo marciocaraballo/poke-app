@@ -11,8 +11,9 @@ import {
 
 import Button from '../components/Button'
 
+import Select from '../components/Select'
+
 interface PokeFiltersProps {
-    readonly pageSize: number
     readonly nameOrIdFilter: string
     readonly setNameOrIdFilter: (nameOrIdFilter: string) => void
     readonly setPageSize: (pageSize: number) => void
@@ -24,7 +25,6 @@ interface PokeFiltersProps {
 
 const PokeFilters = (props: PokeFiltersProps) => {
     const {
-        pageSize,
         setPageSize,
         nameOrIdFilter,
         setNameOrIdFilter,
@@ -36,19 +36,43 @@ const PokeFilters = (props: PokeFiltersProps) => {
 
     return (
         <section>
-            <div>
-                <span>Results to show: </span>
-                <select
-                    data-testid="page-size-select"
-                    value={pageSize}
-                    onChange={(e) => setPageSize(parseInt(e.target.value, 10))}
-                >
-                    <option value={50}>50</option>
-                    <option value={100}>100</option>
-                    <option value={150}>150</option>
-                    <option value={200}>200</option>
-                    <option value={3000}>all</option>
-                </select>
+            <div className={styles.pageSizeFilter}>
+                <label htmlFor="pageSize">Results to show: </label>
+                <Select
+                    defaultValue={{
+                        value: 50,
+                        label: '50',
+                    }}
+                    name="pageSize"
+                    inputId="pageSize"
+                    onChange={(option) => {
+                        if (option !== null) {
+                            setPageSize(option.value)
+                        }
+                    }}
+                    options={[
+                        {
+                            value: 50,
+                            label: '50',
+                        },
+                        {
+                            value: 100,
+                            label: '100',
+                        },
+                        {
+                            value: 150,
+                            label: '150',
+                        },
+                        {
+                            value: 200,
+                            label: '200',
+                        },
+                        {
+                            value: 3000,
+                            label: 'all',
+                        },
+                    ]}
+                />
             </div>
             <div className={styles.nameFilter}>
                 <InputLabel
