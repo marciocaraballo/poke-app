@@ -1,7 +1,7 @@
 import styles from './PokeAbilities.module.css'
 
 import { useEffect, useState } from 'react'
-import Select, { Value } from '../components/Select'
+import Select, { MultiValue, Option } from '../components/Select'
 import {
     listAbilities,
     listPokemons,
@@ -36,7 +36,9 @@ const PokeAbilities = (props: PokeAbilitiesProps) => {
         pokemonListIsLoading,
     } = props
 
-    const [selectedAbilities, setSelectedAbilities] = useState<Value>([])
+    const [selectedAbilities, setSelectedAbilities] = useState<
+        MultiValue<Option>
+    >([])
 
     const [abilitiesList, setAbilitesList] = useState<Array<Ability>>([])
 
@@ -105,7 +107,9 @@ const PokeAbilities = (props: PokeAbilitiesProps) => {
             <label htmlFor="abilities">Filter by abilities: </label>
             <div data-testid="abilities-select">
                 <Select
+                    isMulti
                     name="abilities"
+                    inputId="abilities"
                     placeholder="Enter abilities"
                     value={selectedAbilities}
                     onChange={(options) => setSelectedAbilities(options)}

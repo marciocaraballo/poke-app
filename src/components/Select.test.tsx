@@ -1,11 +1,12 @@
 import { render, screen } from '@testing-library/react'
-import Select, { SelectProps } from './Select'
+import Select, { SelectProps, Option } from './Select'
 
 describe('<Select/>', () => {
-    let props: SelectProps
+    let props: SelectProps<Option>
 
     beforeEach(() => {
         props = {
+            isMulti: false,
             value: [{ label: 'label', value: 'value' }],
             onChange: jest.fn(),
             options: [{ label: 'label', value: 'value' }],

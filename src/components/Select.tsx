@@ -1,48 +1,30 @@
-import ReactSelect, { MultiValue, StylesConfig } from 'react-select'
+import ReactSelect, { GroupBase, MultiValue, Props } from 'react-select'
 
 type Value = MultiValue<Option>
-
-type OnChangeFunction = (newValue: Value) => void
 
 interface Option {
     value: string
     label: string
 }
 
-interface SelectProps {
-    readonly value: Value
-    readonly onChange: OnChangeFunction
-    readonly options: ReadonlyArray<Option>
-    readonly placeholder?: string
-    readonly name: string
-}
-
-const colourStyles: StylesConfig<Option> = {
-    container: (styles) => ({
-        ...styles,
-        width: '500px',
-        marginRight: '4px',
-        marginLeft: '4px',
-    }),
-}
-
-const Select = (props: SelectProps) => {
-    const { value, onChange, options, placeholder, name } = props
-
+function Select<
+    Option,
+    IsMulti extends boolean = false,
+    Group extends GroupBase<Option> = GroupBase<Option>
+>(props: Props<Option, IsMulti, Group>) {
     return (
         <ReactSelect
-            inputId={name}
-            name={name}
-            placeholder={placeholder}
-            styles={colourStyles}
-            value={value}
-            onChange={onChange}
-            isMulti={true}
-            isSearchable={true}
-            options={options}
+            {...props}
+            theme={(theme) => ({ ...theme, borderRadius: 0 })}
         />
     )
 }
 
+type SelectProps<
+    Option,
+    IsMulti extends boolean = false,
+    Group extends GroupBase<Option> = GroupBase<Option>
+> = Props<Option, IsMulti, Group>
+
 export default Select
-export type { Option, SelectProps, Value }
+export type { Option, SelectProps, Value, MultiValue }
