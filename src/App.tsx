@@ -71,7 +71,6 @@ function App() {
                 <PokeFilters
                     pokemonListIsLoading={pokemonListIsLoading}
                     setPokemonListIsLoading={setPokemonListIsLoading}
-                    pageSize={pageSize}
                     setPageSize={setPageSize}
                     nameOrIdFilter={nameOrIdFilter}
                     setNameOrIdFilter={setNameOrIdFilter}
