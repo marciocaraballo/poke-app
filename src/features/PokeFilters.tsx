@@ -14,6 +14,7 @@ import Button from '../components/Button'
 import Select from '../components/Select'
 
 interface PokeFiltersProps {
+    readonly pageSize: number
     readonly nameOrIdFilter: string
     readonly setNameOrIdFilter: (nameOrIdFilter: string) => void
     readonly setPageSize: (pageSize: number) => void
@@ -23,8 +24,32 @@ interface PokeFiltersProps {
     readonly pokemonListIsLoading: boolean
 }
 
+const pageSizeOptions = [
+    {
+        value: 50,
+        label: '50',
+    },
+    {
+        value: 100,
+        label: '100',
+    },
+    {
+        value: 150,
+        label: '150',
+    },
+    {
+        value: 200,
+        label: '200',
+    },
+    {
+        value: 3000,
+        label: 'all',
+    },
+]
+
 const PokeFilters = (props: PokeFiltersProps) => {
     const {
+        pageSize,
         setPageSize,
         nameOrIdFilter,
         setNameOrIdFilter,
@@ -39,10 +64,9 @@ const PokeFilters = (props: PokeFiltersProps) => {
             <div className={styles.pageSizeFilter}>
                 <label htmlFor="pageSize">Results to show: </label>
                 <Select
-                    defaultValue={{
-                        value: 50,
-                        label: '50',
-                    }}
+                    value={pageSizeOptions.find(
+                        (option) => option.value === pageSize
+                    )}
                     name="pageSize"
                     inputId="pageSize"
                     onChange={(option) => {

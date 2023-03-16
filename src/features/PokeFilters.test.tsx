@@ -12,6 +12,7 @@ describe('<PokeFilters/>', () => {
         jest.resetAllMocks()
 
         props = {
+            pageSize: 10,
             setPageSize: jest.fn(),
             nameOrIdFilter: '',
             setNameOrIdFilter: jest.fn(),
@@ -20,6 +21,12 @@ describe('<PokeFilters/>', () => {
             setPokemonListIsLoading: jest.fn(),
             pokemonListIsLoading: false,
         }
+    })
+
+    it('should render without breaking', () => {
+        render(<PokeFilters {...props} />)
+
+        expect(screen.getByText('Results to show:')).toBeInTheDocument()
     })
 
     it('should call setPageSize() with expected params when changing select', async () => {

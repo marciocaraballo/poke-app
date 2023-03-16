@@ -18,10 +18,14 @@ function App() {
     const [isApiDown, setIsApiDown] = useState(false)
     const [pokemonList, setPokemonList] = useState<ReadonlyArray<Pokemon>>([])
     const [nameOrIdFilter, setNameOrIdFilter] = useState(
-        getURLQueryParams('nameOrId') || ''
+        getURLQueryParams('nameOrId') ?? ''
     )
     const [selectedPokemonUrl, setSelectedPokemonUrl] = useState('')
-    const [pageSize, setPageSize] = useState(50)
+    const [pageSize, setPageSize] = useState(
+        getURLQueryParams('pageSize') !== undefined
+            ? parseInt(getURLQueryParams('pageSize') as string, 10)
+            : 50
+    )
 
     useEffect(() => {
         async function fetchPokemonList() {
@@ -61,6 +65,10 @@ function App() {
         updateURLQueryParams('nameOrId', nameOrIdFilter)
     }, [nameOrIdFilter])
 
+    useEffect(() => {
+        updateURLQueryParams('pageSize', pageSize.toString())
+    }, [pageSize])
+
     return (
         <div className={styles.app}>
             <header className={styles.header}>
@@ -69,6 +77,7 @@ function App() {
             <main className={styles.content}>
                 <ApiStatus isApiDown={isApiDown} isOnline={isOnline} />
                 <PokeFilters
+                    pageSize={pageSize}
                     pokemonListIsLoading={pokemonListIsLoading}
                     setPokemonListIsLoading={setPokemonListIsLoading}
                     setPageSize={setPageSize}
