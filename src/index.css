@@ -1,3 +1,24 @@
+:root {
+    --spacing-s: 4px;
+    --spacing-m: 8px;
+    --spacing-l: 16px;
+
+    --color-lightgray: lightgray;
+    --color-black: black;
+    --color-white: white;
+    --color-red: red;
+    --color-lightgreen: lightgreen;
+    --color-yellow: yellow;
+    --color-blue: blue;
+
+    --color-silver: #cccccc;
+    --color-dodger-blue: #2684ff;
+    --color-gray: #808080;
+
+    --header-height: 85px;
+    --filters-height: 90px;
+}
+
 html,
 body,
 #root {
@@ -6,6 +27,7 @@ body,
 
 * {
     box-sizing: border-box;
+    outline-color: var(--color-dodger-blue);
 }
 
 body {
@@ -23,22 +45,4 @@ h1 {
 
 label {
     margin-right: var(--spacing-s);
-}
-
-:root {
-    --spacing-s: 4px;
-    --spacing-m: 8px;
-    --spacing-l: 16px;
-
-    --color-gray: gray;
-    --color-lightgray: lightgray;
-    --color-black: black;
-    --color-white: white;
-    --color-red: red;
-    --color-lightgreen: lightgreen;
-    --color-yellow: yellow;
-    --color-blue: blue;
-
-    --header-height: 85px;
-    --filters-height: 90px;
 }
