@@ -1,5 +1,5 @@
 .details {
-    flex-basis: 55%;
+    flex-basis: 50%;
     flex-grow: 0;
     flex-shrink: 0;
     padding: var(--spacing-m);

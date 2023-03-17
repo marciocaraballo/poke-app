@@ -45,7 +45,7 @@ const PokeCards = (props: PokeCardsProps) => {
 
     return (
         <div className={styles.cards}>
-            <div className={styles.grid}>
+            <div className={styles.layout}>
                 {filteredPokemons.slice(0, pageSize).map((pokemon) => (
                     <Card
                         dataTestId="poke-card"
