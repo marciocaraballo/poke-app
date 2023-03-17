@@ -3,16 +3,16 @@
     flex-basis: 45%;
 }
 
-@media screen and (min-width: 480px) {
-    .cards {
-        flex-basis: 70%;
-    }
-}
-
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, 130px);
     gap: var(--spacing-l);
     height: 100%;
     overflow-y: auto;
+}
+
+@media screen and (min-width: 480px) {
+    .cards {
+        flex-basis: 70%;
+    }
 }

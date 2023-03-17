@@ -110,7 +110,7 @@ const PokeAbilities = (props: PokeAbilitiesProps) => {
                     isMulti
                     name="abilities"
                     inputId="abilities"
-                    placeholder="Enter abilities"
+                    placeholder="Abilities"
                     value={selectedAbilities}
                     onChange={(options) => setSelectedAbilities(options)}
                     options={remainingAbilities.map((ability) => ({
