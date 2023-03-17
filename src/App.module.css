@@ -5,6 +5,7 @@
 .content {
     height: calc(100% - var(--header-height));
     padding-left: var(--spacing-s);
+    padding-right: var(--spacing-s);
 }
 
 .header {
