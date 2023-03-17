@@ -65,7 +65,7 @@ const PokeFilters = (props: PokeFiltersProps) => {
                 <InputLabel
                     id="nameOrIDFilter"
                     label="Filter by name or ID"
-                    placeholder="Enter Pokemon name or ID"
+                    placeholder="Name or ID"
                     value={nameOrIdFilter}
                     onChange={(value: string) => setNameOrIdFilter(value)}
                 />

@@ -52,7 +52,7 @@ describe('<PokeFilters/>', () => {
     it('should call setNameOrIdFilter() with expected params when changing nameOrFilter input', () => {
         render(<PokeFilters {...props} />)
 
-        const input = screen.getByPlaceholderText('Enter Pokemon name or ID')
+        const input = screen.getByLabelText('Filter by name or ID:')
 
         fireEvent.change(input, { target: { value: 'abra' } })
 
