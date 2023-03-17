@@ -1,12 +1,36 @@
 .card {
-    width: 130px;
-    height: 150px;
-    border: 1px solid var(--color-black);
+    border-top: 1px solid var(--color-gray);
+    border-left: 1px solid var(--color-gray);
     text-transform: capitalize;
     text-align: center;
     padding: var(--spacing-s);
+    display: flex;
+    align-items: center;
+}
+
+.card:last-child {
+    border-bottom: 1px solid var(--color-gray);
 }
 
 .card:hover {
     cursor: pointer;
+}
+
+.image {
+    width: 30px;
+    height: 30px;
+    margin-right: var(--spacing-s);
+}
+
+@media screen and (min-width: 480px) {
+    .card {
+        border: 1px solid var(--color-gray);
+        display: block;
+        height: 150px;
+    }
+
+    .image {
+        width: 100px;
+        height: 100px;
+    }
 }
