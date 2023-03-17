@@ -95,7 +95,7 @@ describe('<PokeAbilities/>', () => {
             'ability-2'
         )
 
-        const apply = screen.getByText('Apply')
+        const apply = screen.getByText('Apply filters')
 
         fireEvent.click(apply)
 
@@ -133,7 +133,7 @@ describe('<PokeAbilities/>', () => {
             'ability-2'
         )
 
-        const apply = screen.getByText('Apply')
+        const apply = screen.getByText('Apply filters')
 
         fireEvent.click(apply)
 
@@ -175,7 +175,7 @@ describe('<PokeAbilities/>', () => {
             'ability-2'
         )
 
-        const apply = screen.getByText('Apply')
+        const apply = screen.getByText('Apply filters')
 
         fireEvent.click(apply)
 
@@ -215,7 +215,7 @@ describe('<PokeAbilities/>', () => {
             await screen.findByLabelText('Filter by abilities:')
         )
 
-        const apply = screen.getByText('Apply')
+        const apply = screen.getByText('Apply filters')
 
         fireEvent.click(apply)
 
@@ -257,7 +257,7 @@ describe('<PokeAbilities/>', () => {
             await screen.findByLabelText('Filter by abilities:')
         )
 
-        const apply = screen.getByText('Apply')
+        const apply = screen.getByText('Apply filters')
 
         fireEvent.click(apply)
 
@@ -303,7 +303,7 @@ describe('<PokeAbilities/>', () => {
             await screen.findByLabelText('Filter by abilities:')
         )
 
-        const apply = screen.getByText('Apply')
+        const apply = screen.getByText('Apply filters')
 
         fireEvent.click(apply)
 
@@ -338,7 +338,7 @@ describe('<PokeAbilities/>', () => {
         })
     })
 
-    it('should call setPokemonListIsLoading(true) when clicking Apply', async () => {
+    it('should call setPokemonListIsLoading(true) when clicking Apply filters', async () => {
         await mockListAbilities.mockResolvedValue([
             {
                 name: 'ability-1',
@@ -369,7 +369,7 @@ describe('<PokeAbilities/>', () => {
             'ability-2'
         )
 
-        const apply = screen.getByText('Apply')
+        const apply = screen.getByText('Apply filters')
 
         fireEvent.click(apply)
 
@@ -409,7 +409,7 @@ describe('<PokeAbilities/>', () => {
             'ability-2'
         )
 
-        const apply = screen.getByText('Apply')
+        const apply = screen.getByText('Apply filters')
 
         fireEvent.click(apply)
 

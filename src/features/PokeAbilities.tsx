@@ -110,7 +110,7 @@ const PokeAbilities = (props: PokeAbilitiesProps) => {
                     isMulti
                     name="abilities"
                     inputId="abilities"
-                    placeholder="Abilities"
+                    placeholder="abilities"
                     value={selectedAbilities}
                     onChange={(options) => setSelectedAbilities(options)}
                     options={remainingAbilities.map((ability) => ({
@@ -122,7 +122,7 @@ const PokeAbilities = (props: PokeAbilitiesProps) => {
             <Button
                 className={styles.applyButton}
                 variant="submit"
-                text="Apply"
+                text="Apply filters"
                 disabled={pokemonListIsLoading}
             />
         </form>

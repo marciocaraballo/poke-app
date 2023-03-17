@@ -6,19 +6,19 @@ describe('<ApiStatus/>', () => {
         render(<ApiStatus isApiDown={true} isOnline={true} />)
 
         expect(
-            screen.getByText('Red - 500 errors detected. API might be down.')
+            screen.getByText('Red - Some 500 errors detected, API might be down')
         ).toBeInTheDocument()
     })
 
     it('should render an success message if isApiDown=true', () => {
         render(<ApiStatus isApiDown={false} isOnline={true} />)
 
-        expect(screen.getByText('Green - API working.')).toBeInTheDocument()
+        expect(screen.getByText('Green - API is working as expected')).toBeInTheDocument()
     })
 
-    it('should render an success message if connection is offline', () => {
+    it('should render a warning message if connection is offline', () => {
         render(<ApiStatus isApiDown={false} isOnline={false} />)
 
-        expect(screen.getByText('You seem to be offline.')).toBeInTheDocument()
+        expect(screen.getByText('Warning - You seem to be offline')).toBeInTheDocument()
     })
 })

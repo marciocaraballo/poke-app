@@ -65,7 +65,7 @@ describe('<App/>', () => {
         await waitFor(() => {
             expect(
                 screen.getByText(
-                    'Red - 500 errors detected. API might be down.'
+                    'Red - Some 500 errors detected, API might be down'
                 )
             ).toBeInTheDocument()
         })

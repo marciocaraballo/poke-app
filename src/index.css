@@ -39,10 +39,18 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-h1 {
+h1, h2 {
     margin: 0;
 }
 
 label {
     margin-right: var(--spacing-s);
+}
+
+ul {
+    padding: 0
+}
+
+li {
+    list-style: none;
 }

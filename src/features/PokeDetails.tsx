@@ -62,7 +62,7 @@ const PokeDetailsPanel = (props: PokeDetailsProps) => {
     if (!selectedPokemonUrl) {
         return (
             <aside className={styles.details}>
-                Please click on a PokeCard from the grid
+                Choose a pokemon card from the list
             </aside>
         )
     }
@@ -77,7 +77,7 @@ const PokeDetailsPanel = (props: PokeDetailsProps) => {
 
     if (pokemonDetails.id) {
         return (
-            <aside className={styles.details}>
+            <aside className={styles.details} aria-live="polite">
                 <div className={styles.panel}>
                     <header>
                         <h2
@@ -92,35 +92,36 @@ const PokeDetailsPanel = (props: PokeDetailsProps) => {
                         pokemonDetails.backImageUrl === null ? (
                             <p>No images available</p>
                         ) : (
-                            <>
+                            <figure>
                                 <img
                                     src={pokemonDetails.frontImageUrl}
-                                    alt={pokemonDetails.name}
+                                    alt=""
                                     height={96}
                                     width={96}
                                 />
                                 <img
                                     src={pokemonDetails.backImageUrl}
-                                    alt={pokemonDetails.name}
+                                    alt=""
                                     height={96}
                                     width={96}
                                 />
-                            </>
+                                <figcaption>Pokemon front and back images.</figcaption>
+                            </figure>
                         )}
                     </div>
-                    <div className={styles.list}>
-                        <p className={styles.listItem}>
+                    <ul className={styles.list}>
+                        <li className={styles.listItem} aria-label={`Pokemon ID is ${pokemonDetails.id}.`}>
                             <strong>ID: </strong> {pokemonDetails.id}
-                        </p>
-                        <p className={styles.listItem}>
+                        </li>
+                        <li className={styles.listItem} aria-label={`Pokemon height is ${pokemonDetails.height * DM_TO_CM_CONV} cm.`}>
                             <strong>Height: </strong>{' '}
                             {pokemonDetails.height * DM_TO_CM_CONV} cm
-                        </p>
-                        <p className={styles.listItem}>
+                        </li>
+                        <li className={styles.listItem}>
                             <strong>Weight: </strong>{' '}
                             {pokemonDetails.weight * HG_TO_KG_CONV} kg
-                        </p>
-                        <p className={styles.listItem}>
+                        </li>
+                        <li className={styles.listItem}>
                             <strong>Abilities: </strong>{' '}
                             {pokemonDetails.abilities
                                 .map(
@@ -128,20 +129,20 @@ const PokeDetailsPanel = (props: PokeDetailsProps) => {
                                         pokemonAbility.ability.name
                                 )
                                 .join(', ')}
-                        </p>
-                        <p className={styles.listItem}>
+                        </li>
+                        <li className={styles.listItem}>
                             <strong>Types: </strong>{' '}
                             {pokemonDetails.types
                                 .map((pokemonType) => pokemonType.name)
                                 .join(', ')}
-                        </p>
-                    </div>
+                        </li>
+                    </ul>
                 </div>
             </aside>
         )
     }
 
-    return <aside className={styles.details}>No data available</aside>
+    return <aside className={styles.details}>No pokemon data available</aside>
 }
 
 export default PokeDetailsPanel
