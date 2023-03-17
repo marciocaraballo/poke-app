@@ -26,18 +26,23 @@ describe('<PokeFilters/>', () => {
     it('should render without breaking', () => {
         render(<PokeFilters {...props} />)
 
-        expect(screen.getByText('Results to show:')).toBeInTheDocument()
+        expect(
+            screen.getByText('Results per page to show:')
+        ).toBeInTheDocument()
     })
 
     it('should call setPageSize() with expected params when changing select', async () => {
         render(<PokeFilters {...props} />)
 
-        fireEvent.change(await screen.findByLabelText('Results to show:'), {
-            target: { value: '' },
-        })
+        fireEvent.change(
+            await screen.findByLabelText('Results per page to show:'),
+            {
+                target: { value: '' },
+            }
+        )
 
         await selectEvent.select(
-            await screen.findByLabelText('Results to show:'),
+            await screen.findByLabelText('Results per page to show:'),
             '100'
         )
 

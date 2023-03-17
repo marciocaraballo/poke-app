@@ -5,15 +5,17 @@ interface InputLabelProps {
     readonly value: string
     readonly onChange: (value: string) => void
     readonly placeholder?: string
+    readonly id: string
 }
 
 const InputLabel = (props: InputLabelProps) => {
-    const { label, value, onChange, placeholder } = props
+    const { label, value, onChange, placeholder, id } = props
 
     return (
         <div>
-            <span>{label}: </span>
+            <label htmlFor={id}>{label}:</label>
             <input
+                id={id}
                 className={styles.input}
                 placeholder={placeholder ? placeholder : 'Enter a value'}
                 value={value}

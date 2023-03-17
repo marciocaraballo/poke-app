@@ -3,9 +3,9 @@
 }
 
 .ok {
-    color: var(--color-green);
+    color: var(--color-lightgreen);
 }
 
 .warning {
-    color: var(--color-orange);
+    color: var(--color-yellow);
 }

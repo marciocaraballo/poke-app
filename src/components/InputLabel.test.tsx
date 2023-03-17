@@ -6,6 +6,7 @@ describe('<InputLabel/>', () => {
 
     beforeEach(() => {
         props = {
+            id: 'id',
             label: 'inputlabel',
             value: 'value',
             placeholder: 'placeholder',
