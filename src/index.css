@@ -30,7 +30,7 @@ label {
     --spacing-m: 8px;
     --spacing-l: 16px;
 
-    --color-gray: gray;
+    --color-gray: #808080;
     --color-lightgray: lightgray;
     --color-black: black;
     --color-white: white;
@@ -38,6 +38,8 @@ label {
     --color-lightgreen: lightgreen;
     --color-yellow: yellow;
     --color-blue: blue;
+
+    --color-silver: #cccccc;
 
     --header-height: 85px;
     --filters-height: 90px;
