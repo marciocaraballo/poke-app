@@ -2,7 +2,7 @@ import { render, screen, waitFor } from '@testing-library/react'
 import App from './App'
 import { listPokemons } from './api/fetch'
 import toast from 'react-hot-toast'
-import { updateURLQueryParams, getURLQueryParams } from './utils/urlUtils'
+import { getURLQueryParams } from './utils/urlUtils'
 
 jest.mock('./api/fetch')
 jest.mock('./features/PokeFilters', () => () => 'PokeAbilities')
@@ -10,9 +10,6 @@ jest.mock('react-hot-toast')
 jest.mock('./utils/urlUtils')
 
 const mockListPokemon = listPokemons as jest.MockedFunction<typeof listPokemons>
-const mockUpdateURLQueryParams = updateURLQueryParams as jest.MockedFunction<
-    typeof updateURLQueryParams
->
 const mockGetURLQueryParams = getURLQueryParams as jest.MockedFunction<
     typeof getURLQueryParams
 >
