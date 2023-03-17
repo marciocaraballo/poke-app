@@ -31,6 +31,15 @@
     border-bottom: none;
 }
 
+.image {
+    width: 45px;
+    height: 45px;
+}
+
+.images {
+    display: flex;
+}
+
 @media screen and (min-width: 480px) {
     .details {
         flex-basis: 35%;

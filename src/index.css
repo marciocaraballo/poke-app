@@ -55,3 +55,7 @@ ul {
 li {
     list-style: none;
 }
+
+figcaption {
+    font-size: 14px;
+}

@@ -93,20 +93,24 @@ const PokeDetailsPanel = (props: PokeDetailsProps) => {
                             <p>No images available</p>
                         ) : (
                             <figure>
-                                <img
-                                    src={pokemonDetails.frontImageUrl}
-                                    alt=""
-                                    height={96}
-                                    width={96}
-                                />
-                                <img
-                                    src={pokemonDetails.backImageUrl}
-                                    alt=""
-                                    height={96}
-                                    width={96}
-                                />
+                                <div className={styles.images}>
+                                    <img
+                                        className={styles.image}
+                                        src={pokemonDetails.frontImageUrl}
+                                        alt=""
+                                        height={96}
+                                        width={96}
+                                    />
+                                    <img
+                                        className={styles.image}
+                                        src={pokemonDetails.backImageUrl}
+                                        alt=""
+                                        height={96}
+                                        width={96}
+                                    />
+                                </div>
                                 <figcaption>
-                                    Pokemon front and back images.
+                                    <i>Pokemon front and back images.</i>
                                 </figcaption>
                             </figure>
                         )}
