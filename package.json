@@ -49,7 +49,7 @@
         "@types/node": "18.13.0",
         "@types/react": "18.0.28",
         "@types/react-dom": "18.0.10",
-        "husky": "8.0.0",
+        "husky": "8.0.3",
         "nock": "13.3.0",
         "prettier": "2.8.4",
         "react-select-event": "^5.5.1"
