@@ -105,15 +105,25 @@ const PokeDetailsPanel = (props: PokeDetailsProps) => {
                                     height={96}
                                     width={96}
                                 />
-                                <figcaption>Pokemon front and back images.</figcaption>
+                                <figcaption>
+                                    Pokemon front and back images.
+                                </figcaption>
                             </figure>
                         )}
                     </div>
                     <ul className={styles.list}>
-                        <li className={styles.listItem} aria-label={`Pokemon ID is ${pokemonDetails.id}.`}>
+                        <li
+                            className={styles.listItem}
+                            aria-label={`Pokemon ID is ${pokemonDetails.id}.`}
+                        >
                             <strong>ID: </strong> {pokemonDetails.id}
                         </li>
-                        <li className={styles.listItem} aria-label={`Pokemon height is ${pokemonDetails.height * DM_TO_CM_CONV} cm.`}>
+                        <li
+                            className={styles.listItem}
+                            aria-label={`Pokemon height is ${
+                                pokemonDetails.height * DM_TO_CM_CONV
+                            } cm.`}
+                        >
                             <strong>Height: </strong>{' '}
                             {pokemonDetails.height * DM_TO_CM_CONV} cm
                         </li>

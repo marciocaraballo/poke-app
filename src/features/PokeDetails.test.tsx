@@ -108,7 +108,9 @@ describe('<PokeDetailsPanel/>', () => {
         render(<PokeDetailsPanel {...props} selectedPokemonUrl="url/abra" />)
 
         await waitFor(() => {
-            expect(screen.getByText('No pokemon data available')).toBeInTheDocument()
+            expect(
+                screen.getByText('No pokemon data available')
+            ).toBeInTheDocument()
         })
     })
 

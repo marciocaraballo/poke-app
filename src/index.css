@@ -39,7 +39,8 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2 {
+h1,
+h2 {
     margin: 0;
 }
 
@@ -48,7 +49,7 @@ label {
 }
 
 ul {
-    padding: 0
+    padding: 0;
 }
 
 li {
