@@ -10,7 +10,7 @@
 
 @media screen and (min-width: 480px) {
     .cards {
-        flex-basis: 70%;
+        flex-basis: 65%;
     }
 
     .layout {
