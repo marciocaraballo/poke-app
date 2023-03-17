@@ -4,8 +4,8 @@ type QueryParams = Readonly<DataMatcherMap>
 type ResponseBody = Readonly<Body>
 
 interface HTTPMock {
-    get: (url: string, query?: QueryParams) => HTTPMock
-    response: (statusCode: number, responseBody?: ResponseBody) => HTTPMock
+    get: (url: string, query?: QueryParams) => this
+    response: (statusCode: number, responseBody?: ResponseBody) => this
 }
 
 const httpMock = (): HTTPMock => {
