@@ -31,7 +31,7 @@ const Card = (props: CardProps) => {
                 height={100}
                 width={100}
             />
-            {name}
+            <span className={styles.name}>{name}</span>
         </div>
     )
 }
