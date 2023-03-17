@@ -120,6 +120,7 @@ const PokeAbilities = (props: PokeAbilitiesProps) => {
                 />
             </div>
             <Button
+                className={styles.applyButton}
                 variant="submit"
                 text="Apply"
                 disabled={pokemonListIsLoading}

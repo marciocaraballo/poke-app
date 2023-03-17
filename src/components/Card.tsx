@@ -28,6 +28,7 @@ const Card = (props: CardProps) => {
                     src={PokeBall}
                     alt={`PokeCard associated to ${name}`}
                     height={100}
+                    width={100}
                 />
                 {name}
             </div>

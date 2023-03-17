@@ -3,3 +3,7 @@
     align-items: center;
     margin-top: var(--spacing-s);
 }
+
+.applyButton {
+    margin-left: var(--spacing-s);
+}

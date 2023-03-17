@@ -60,47 +60,11 @@ const PokeFilters = (props: PokeFiltersProps) => {
     } = props
 
     return (
-        <section>
-            <div className={styles.pageSizeFilter}>
-                <label htmlFor="pageSize">Results to show: </label>
-                <Select
-                    value={pageSizeOptions.find(
-                        (option) => option.value === pageSize
-                    )}
-                    name="pageSize"
-                    inputId="pageSize"
-                    onChange={(option) => {
-                        if (option !== null) {
-                            setPageSize(option.value)
-                        }
-                    }}
-                    options={[
-                        {
-                            value: 50,
-                            label: '50',
-                        },
-                        {
-                            value: 100,
-                            label: '100',
-                        },
-                        {
-                            value: 150,
-                            label: '150',
-                        },
-                        {
-                            value: 200,
-                            label: '200',
-                        },
-                        {
-                            value: 3000,
-                            label: 'all',
-                        },
-                    ]}
-                />
-            </div>
+        <section className={styles.filters}>
             <div className={styles.nameFilter}>
                 <InputLabel
-                    label="Filter by"
+                    id="nameOrIDFilter"
+                    label="Filter by name or ID"
                     placeholder="Enter Pokemon name or ID"
                     value={nameOrIdFilter}
                     onChange={(value: string) => setNameOrIdFilter(value)}
@@ -112,12 +76,51 @@ const PokeFilters = (props: PokeFiltersProps) => {
                     disabled={nameOrIdFilter === ''}
                 />
             </div>
-            <PokeAbilities
-                pokemonListIsLoading={pokemonListIsLoading}
-                setPokemonListIsLoading={setPokemonListIsLoading}
-                setPokemonList={setPokemonList}
-                setIsApiDown={setIsApiDown}
-            />
+            <div className={styles.dropdownFilters}>
+                <PokeAbilities
+                    pokemonListIsLoading={pokemonListIsLoading}
+                    setPokemonListIsLoading={setPokemonListIsLoading}
+                    setPokemonList={setPokemonList}
+                    setIsApiDown={setIsApiDown}
+                />
+                <div className={styles.pageSizeFilter}>
+                    <label htmlFor="pageSize">Results per page to show: </label>
+                    <Select
+                        value={pageSizeOptions.find(
+                            (option) => option.value === pageSize
+                        )}
+                        name="pageSize"
+                        inputId="pageSize"
+                        onChange={(option) => {
+                            if (option !== null) {
+                                setPageSize(option.value)
+                            }
+                        }}
+                        options={[
+                            {
+                                value: 50,
+                                label: '50',
+                            },
+                            {
+                                value: 100,
+                                label: '100',
+                            },
+                            {
+                                value: 150,
+                                label: '150',
+                            },
+                            {
+                                value: 200,
+                                label: '200',
+                            },
+                            {
+                                value: 3000,
+                                label: 'all',
+                            },
+                        ]}
+                    />
+                </div>
+            </div>
         </section>
     )
 }

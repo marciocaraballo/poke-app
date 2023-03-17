@@ -73,9 +73,9 @@ function App() {
         <div className={styles.app}>
             <header className={styles.header}>
                 <h1 data-testid="poke-app-welcome">Welcome to PokeApp!</h1>
+                <ApiStatus isApiDown={isApiDown} isOnline={isOnline} />
             </header>
             <main className={styles.content}>
-                <ApiStatus isApiDown={isApiDown} isOnline={isOnline} />
                 <PokeFilters
                     pageSize={pageSize}
                     pokemonListIsLoading={pokemonListIsLoading}
