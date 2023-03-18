@@ -7,11 +7,10 @@
     border-left: 1px solid var(--color-gray);
     border-top: 1px solid var(--color-gray);
     border-right: 1px solid var(--color-gray);
-    text-transform: capitalize;
 }
 
 .name {
-    margin: 0;
+    text-transform: capitalize;
 }
 
 .panel {
@@ -30,6 +29,15 @@
 
 .listItem:last-child {
     border-bottom: none;
+}
+
+.image {
+    width: 45px;
+    height: 45px;
+}
+
+.images {
+    display: flex;
 }
 
 @media screen and (min-width: 480px) {

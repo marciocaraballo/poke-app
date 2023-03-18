@@ -14,14 +14,14 @@ const ApiStatus = (props: ApiStatusProps) => {
         ? styles.error
         : styles.ok
     const statusMessage = !isOnline
-        ? 'You seem to be offline.'
+        ? 'Warning - You seem to be offline'
         : isApiDown
-        ? 'Red - 500 errors detected. API might be down.'
-        : 'Green - API working.'
+        ? 'Red - Some 500 errors detected, API might be down'
+        : 'Green - API is working as expected'
 
     return (
-        <span>
-            Api status: <span className={statusStyle}>{statusMessage}</span>
+        <span tabIndex={0} aria-live="polite">
+            PokeApi status: <span className={statusStyle}>{statusMessage}</span>
         </span>
     )
 }

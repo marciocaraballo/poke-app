@@ -25,6 +25,7 @@ const Card = (props: CardProps) => {
             onClick={() => onCardClick(url)}
         >
             <img
+                aria-hidden={true}
                 className={styles.image}
                 src={PokeBall}
                 alt={`PokeCard associated to ${name}`}
