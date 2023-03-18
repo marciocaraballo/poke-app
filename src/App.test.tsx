@@ -71,7 +71,7 @@ describe('<App/>', () => {
         })
     })
 
-    it('should call getURLQueryParams() to retrieve name filter', async () => {
+    it('should call getURLQueryParams() to retrieve nameOrId filter', async () => {
         await mockListPokemon.mockResolvedValue([
             {
                 name: 'abra',
@@ -87,6 +87,44 @@ describe('<App/>', () => {
 
         await screen.findByText('pikachu')
 
-        expect(mockGetURLQueryParams).toHaveBeenCalledWith('nameOrId')
+        expect(mockGetURLQueryParams.mock.calls[0][0]).toEqual('nameOrId')
+    })
+
+    it('should call getURLQueryParams() to retrieve url filter', async () => {
+        await mockListPokemon.mockResolvedValue([
+            {
+                name: 'abra',
+                url: 'url/abra',
+            },
+            {
+                name: 'pikachu',
+                url: 'url/pikachu',
+            },
+        ])
+
+        render(<App />)
+
+        await screen.findByText('pikachu')
+
+        expect(mockGetURLQueryParams.mock.calls[1][0]).toEqual('url')
+    })
+
+    it('should call getURLQueryParams() to retrieve pageSize filter', async () => {
+        await mockListPokemon.mockResolvedValue([
+            {
+                name: 'abra',
+                url: 'url/abra',
+            },
+            {
+                name: 'pikachu',
+                url: 'url/pikachu',
+            },
+        ])
+
+        render(<App />)
+
+        await screen.findByText('pikachu')
+
+        expect(mockGetURLQueryParams.mock.calls[2][0]).toEqual('pageSize')
     })
 })

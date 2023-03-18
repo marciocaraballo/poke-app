@@ -16,6 +16,7 @@
     justify-content: center;
     color: white;
     padding: var(--spacing-m);
+    text-align: center;
 }
 
 .layout {
