@@ -20,7 +20,9 @@ function App() {
     const [nameOrIdFilter, setNameOrIdFilter] = useState(
         getURLQueryParams('nameOrId') ?? ''
     )
-    const [selectedPokemonUrl, setSelectedPokemonUrl] = useState('')
+    const [selectedPokemonUrl, setSelectedPokemonUrl] = useState(
+        getURLQueryParams('url') ?? ''
+    )
     const [pageSize, setPageSize] = useState(
         getURLQueryParams('pageSize') !== undefined
             ? parseInt(getURLQueryParams('pageSize') as string, 10)
@@ -68,6 +70,10 @@ function App() {
     useEffect(() => {
         updateURLQueryParams('pageSize', pageSize.toString())
     }, [pageSize])
+
+    useEffect(() => {
+        updateURLQueryParams('url', selectedPokemonUrl)
+    }, [selectedPokemonUrl])
 
     return (
         <div className={styles.app}>
