@@ -232,7 +232,7 @@ describe('<PokeDetailsPanel/>', () => {
         render(<PokeDetailsPanel {...props} selectedPokemonUrl="url/abra" />)
 
         await waitFor(() => {
-            expect(screen.getByText('1.5 kg')).toBeInTheDocument()
+            expect(screen.getByText('1.50 kg')).toBeInTheDocument()
         })
     })
 
