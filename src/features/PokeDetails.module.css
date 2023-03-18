@@ -32,12 +32,13 @@
 }
 
 .image {
-    width: 45px;
-    height: 45px;
+    width: 80px;
+    height: 80px;
 }
 
 .images {
     display: flex;
+    justify-content: center;
 }
 
 @media screen and (min-width: 480px) {
@@ -47,5 +48,10 @@
 
     .name {
         margin: initial;
+    }
+
+    .image {
+        width: 96px;
+        height: 96px;
     }
 }

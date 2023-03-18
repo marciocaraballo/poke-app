@@ -133,7 +133,8 @@ const PokeDetailsPanel = (props: PokeDetailsProps) => {
                         </li>
                         <li className={styles.listItem}>
                             <strong>Weight: </strong>{' '}
-                            {pokemonDetails.weight * HG_TO_KG_CONV} kg
+                            {(pokemonDetails.weight * HG_TO_KG_CONV).toFixed(2)}{' '}
+                            kg
                         </li>
                         <li className={styles.listItem}>
                             <strong>Abilities: </strong>{' '}
