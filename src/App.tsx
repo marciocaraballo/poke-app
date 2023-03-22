@@ -6,9 +6,8 @@ import ApiStatus from './features/ApiStatus'
 import PokeFilters from './features/PokeFilters'
 import PokeGrid from './features/PokeCards'
 import PokeDetails from './features/PokeDetails'
-import { listPokemons } from './api/fetch'
 import { Pokemon } from './types/app'
-import toast, { Toaster } from 'react-hot-toast'
+import { Toaster } from 'react-hot-toast'
 
 import { updateURLQueryParams, getURLQueryParams } from './utils/urlUtils'
 
@@ -28,28 +27,6 @@ function App() {
             ? parseInt(getURLQueryParams('pageSize') as string, 10)
             : 50
     )
-
-    useEffect(() => {
-        async function fetchPokemonList() {
-            setPokemonListIsLoading(true)
-
-            try {
-                const pokemonList = await listPokemons()
-
-                setPokemonList(pokemonList)
-                setPokemonListIsLoading(false)
-                setIsApiDown(false)
-            } catch (e) {
-                if (e instanceof Error && (e.cause as number) >= 500) {
-                    setIsApiDown(true)
-                }
-                setPokemonListIsLoading(false)
-                toast.error('Something went wrong with API call')
-            }
-        }
-
-        fetchPokemonList()
-    }, [])
 
     useEffect(() => {
         const onOnlineStatusUpdate = () => setIsOnline(navigator.onLine)
