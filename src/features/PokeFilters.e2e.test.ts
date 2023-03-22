@@ -7,15 +7,13 @@ test.describe('PokeFilters', () => {
     test('should filter pokemon list by abilities', async ({ page }) => {
         let appPO = AppPO(page)
         let pokeCardsPO = PokeCardsPO(page)
-        let pokeFiltersPO = PokeAbilitiesPO(page)
+        let pokeAbilitiesPO = PokeAbilitiesPO(page)
 
         await appPO.goToRoot()
 
         await pokeCardsPO.waitForACardIsVisibile()
 
-        await pokeFiltersPO.chooseAbility('stench')
-
-        await pokeFiltersPO.clickApply()
+        await pokeAbilitiesPO.chooseAbility('stench')
 
         await pokeCardsPO.waitForCardsLoading()
 

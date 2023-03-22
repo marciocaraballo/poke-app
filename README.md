@@ -1,6 +1,6 @@
 ### PokeApp - Gotta list'em all
 
-API: https://pokeapi.co/ 
+API: https://pokeapi.co/
 Deployed site: https://melodious-fox-fe0bed.netlify.app/
 
 A user can list pokemons, filter by name, ID or (multiple) abilities.

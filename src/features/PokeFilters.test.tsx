@@ -19,7 +19,6 @@ describe('<PokeFilters/>', () => {
             setPokemonList: jest.fn(),
             setIsApiDown: jest.fn(),
             setPokemonListIsLoading: jest.fn(),
-            pokemonListIsLoading: false,
         }
     })
 

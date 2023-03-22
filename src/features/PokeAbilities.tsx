@@ -17,24 +17,16 @@ import {
 import { Ability } from '../types/app'
 import toast from 'react-hot-toast'
 
-import Button from '../components/Button'
-
 interface PokeAbilitiesProps {
     readonly setIsApiDown: SetIsApiDown
     readonly setPokemonList: SetPokemonList
     readonly setPokemonListIsLoading: SetPokemonListIsLoading
-    readonly pokemonListIsLoading: boolean
 }
 
 const MAX_OPTIONS_LIMIT = 20
 
 const PokeAbilities = (props: PokeAbilitiesProps) => {
-    const {
-        setIsApiDown,
-        setPokemonList,
-        setPokemonListIsLoading,
-        pokemonListIsLoading,
-    } = props
+    const { setIsApiDown, setPokemonList, setPokemonListIsLoading } = props
 
     const [selectedAbilities, setSelectedAbilities] = useState<
         MultiValue<Option>
@@ -60,6 +52,54 @@ const PokeAbilities = (props: PokeAbilitiesProps) => {
         fetchAbilitiesList()
     }, [setIsApiDown])
 
+    useEffect(() => {
+        let ignore = false
+
+        async function updatePokemonList() {
+            setPokemonListIsLoading(true)
+
+            try {
+                if (selectedAbilities.length !== 0) {
+                    const results = await getPokemonsByAbilities(
+                        selectedAbilities.map(
+                            (abilityOption) => abilityOption.value
+                        )
+                    )
+
+                    if (!ignore) {
+                        setPokemonList(results)
+                        setIsApiDown(false)
+                    }
+                } else {
+                    const pokemonList = await listPokemons()
+
+                    if (!ignore) {
+                        setPokemonList(pokemonList)
+                        setIsApiDown(false)
+                    }
+                }
+            } catch (e) {
+                if (e instanceof Error && (e.cause as number) >= 500) {
+                    setIsApiDown(true)
+                }
+                toast.error('Something went wrong with API call')
+            }
+
+            setPokemonListIsLoading(false)
+        }
+
+        updatePokemonList()
+
+        return () => {
+            ignore = true
+        }
+    }, [
+        selectedAbilities,
+        setIsApiDown,
+        setPokemonList,
+        setPokemonListIsLoading,
+    ])
+
     const remainingAbilities = abilitiesList
         .filter((ability) => {
             return (
@@ -71,39 +111,7 @@ const PokeAbilities = (props: PokeAbilitiesProps) => {
         .slice(0, MAX_OPTIONS_LIMIT)
 
     return (
-        <form
-            className={styles.abilities}
-            onSubmit={async (e) => {
-                e.preventDefault()
-
-                setPokemonListIsLoading(true)
-
-                try {
-                    if (selectedAbilities.length !== 0) {
-                        const results = await getPokemonsByAbilities(
-                            selectedAbilities.map(
-                                (abilityOption) => abilityOption.value
-                            )
-                        )
-
-                        setPokemonList(results)
-                        setIsApiDown(false)
-                    } else {
-                        const pokemonList = await listPokemons()
-
-                        setPokemonList(pokemonList)
-                        setIsApiDown(false)
-                    }
-                } catch (e) {
-                    if (e instanceof Error && (e.cause as number) >= 500) {
-                        setIsApiDown(true)
-                    }
-                    toast.error('Something went wrong with API call')
-                }
-
-                setPokemonListIsLoading(false)
-            }}
-        >
+        <div className={styles.abilities}>
             <label htmlFor="abilities">Filter by abilities: </label>
             <div data-testid="abilities-select">
                 <Select
@@ -119,13 +127,7 @@ const PokeAbilities = (props: PokeAbilitiesProps) => {
                     }))}
                 />
             </div>
-            <Button
-                className={styles.applyButton}
-                variant="submit"
-                text="Apply filters"
-                disabled={pokemonListIsLoading}
-            />
-        </form>
+        </div>
     )
 }
 
