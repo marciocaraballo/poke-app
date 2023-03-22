@@ -1,17 +1,19 @@
 import { render, screen, waitFor } from '@testing-library/react'
 import App from './App'
-import { listPokemons } from './api/fetch'
+import { listPokemons, listAbilities } from './api/fetch'
 import toast from 'react-hot-toast'
 import { getURLQueryParams } from './utils/urlUtils'
 
 jest.mock('./api/fetch')
-jest.mock('./features/PokeFilters', () => () => 'PokeAbilities')
 jest.mock('react-hot-toast')
 jest.mock('./utils/urlUtils')
 
 const mockListPokemon = listPokemons as jest.MockedFunction<typeof listPokemons>
 const mockGetURLQueryParams = getURLQueryParams as jest.MockedFunction<
     typeof getURLQueryParams
+>
+const mockListAbilities = listAbilities as jest.MockedFunction<
+    typeof listAbilities
 >
 
 describe('<App/>', () => {
@@ -23,6 +25,21 @@ describe('<App/>', () => {
     })
 
     it('should render a pokemon list', async () => {
+        await mockListAbilities.mockResolvedValue([
+            {
+                name: 'ability-1',
+                url: 'url/ability-1',
+            },
+            {
+                name: 'ability-2',
+                url: 'url/ability-2',
+            },
+            {
+                name: 'ability-3',
+                url: 'url/ability-3',
+            },
+        ])
+
         await mockListPokemon.mockResolvedValue([
             {
                 name: 'abra',
@@ -42,6 +59,21 @@ describe('<App/>', () => {
     })
 
     it('should call toast.error when rejecting api call', async () => {
+        await mockListAbilities.mockResolvedValue([
+            {
+                name: 'ability-1',
+                url: 'url/ability-1',
+            },
+            {
+                name: 'ability-2',
+                url: 'url/ability-2',
+            },
+            {
+                name: 'ability-3',
+                url: 'url/ability-3',
+            },
+        ])
+
         await mockListPokemon.mockRejectedValue(
             new Error('Something went wrong', { cause: 400 })
         )
@@ -56,6 +88,10 @@ describe('<App/>', () => {
     })
 
     it('should set API indicator when 500 error codes are detected', async () => {
+        await mockListAbilities.mockRejectedValue(
+            new Error('Something went wrong', { cause: 500 })
+        )
+
         await mockListPokemon.mockRejectedValue(
             new Error('Something went wrong', { cause: 500 })
         )
@@ -72,6 +108,21 @@ describe('<App/>', () => {
     })
 
     it('should call getURLQueryParams() to retrieve nameOrId filter', async () => {
+        await mockListAbilities.mockResolvedValue([
+            {
+                name: 'ability-1',
+                url: 'url/ability-1',
+            },
+            {
+                name: 'ability-2',
+                url: 'url/ability-2',
+            },
+            {
+                name: 'ability-3',
+                url: 'url/ability-3',
+            },
+        ])
+
         await mockListPokemon.mockResolvedValue([
             {
                 name: 'abra',
@@ -91,6 +142,21 @@ describe('<App/>', () => {
     })
 
     it('should call getURLQueryParams() to retrieve url filter', async () => {
+        await mockListAbilities.mockResolvedValue([
+            {
+                name: 'ability-1',
+                url: 'url/ability-1',
+            },
+            {
+                name: 'ability-2',
+                url: 'url/ability-2',
+            },
+            {
+                name: 'ability-3',
+                url: 'url/ability-3',
+            },
+        ])
+
         await mockListPokemon.mockResolvedValue([
             {
                 name: 'abra',
@@ -110,6 +176,21 @@ describe('<App/>', () => {
     })
 
     it('should call getURLQueryParams() to retrieve pageSize filter', async () => {
+        await mockListAbilities.mockResolvedValue([
+            {
+                name: 'ability-1',
+                url: 'url/ability-1',
+            },
+            {
+                name: 'ability-2',
+                url: 'url/ability-2',
+            },
+            {
+                name: 'ability-3',
+                url: 'url/ability-3',
+            },
+        ])
+
         await mockListPokemon.mockResolvedValue([
             {
                 name: 'abra',
