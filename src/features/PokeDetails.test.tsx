@@ -2,13 +2,17 @@ import { render, screen, waitFor } from '@testing-library/react'
 import PokeDetailsPanel, { PokeDetailsProps } from './PokeDetails'
 import { getPokemonDetails } from '../api/fetch'
 import { PokeDetails } from '../types/app'
-import toast from 'react-hot-toast'
+import { notificationError } from '../components/Notifications'
 
 jest.mock('../api/fetch')
-jest.mock('react-hot-toast')
+jest.mock('../components/Notifications')
 
 const mockGetPokemonDetails = getPokemonDetails as jest.MockedFunction<
     typeof getPokemonDetails
+>
+
+const mockNotificationError = notificationError as jest.MockedFunction<
+    typeof notificationError
 >
 
 describe('<PokeDetailsPanel/>', () => {
@@ -17,8 +21,6 @@ describe('<PokeDetailsPanel/>', () => {
     beforeEach(() => {
         jest.resetModules()
         jest.resetAllMocks()
-
-        toast.error = jest.fn()
 
         props = {
             selectedPokemonUrl: '',
@@ -122,7 +124,7 @@ describe('<PokeDetailsPanel/>', () => {
         render(<PokeDetailsPanel {...props} selectedPokemonUrl="url/abra" />)
 
         await waitFor(() => {
-            expect(toast.error).toHaveBeenCalledWith(
+            expect(mockNotificationError).toHaveBeenCalledWith(
                 'Something went wrong with API call'
             )
         })

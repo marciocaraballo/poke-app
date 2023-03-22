@@ -7,7 +7,8 @@ import PokeFilters from './features/PokeFilters'
 import PokeGrid from './features/PokeCards'
 import PokeDetails from './features/PokeDetails'
 import { Pokemon } from './types/app'
-import { Toaster } from 'react-hot-toast'
+
+import { Notifications } from './components/Notifications'
 
 import {
     updateURLQueryParams,
@@ -96,7 +97,7 @@ function App() {
                     />
                 </div>
             </main>
-            <Toaster position="bottom-center" reverseOrder={false} />
+            <Notifications />
         </div>
     )
 }
