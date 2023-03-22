@@ -83,6 +83,7 @@ const PokeFilters = (props: PokeFiltersProps) => {
                 <div className={styles.pageSizeFilter}>
                     <label htmlFor="pageSize">Results per page to show: </label>
                     <Select
+                        variant="s"
                         value={pageSizeOptions.find(
                             (option) => option.value === pageSize
                         )}
