@@ -63,7 +63,8 @@
             "!**/*PageObject.{js,jsx,ts,tsx}",
             "!**/node_modules/**",
             "!**/vendor/**",
-            "!**/*.d.ts"
+            "!**/*.d.ts",
+            "!**/index.tsx"
         ]
     }
 }
