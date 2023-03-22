@@ -16,6 +16,12 @@ function Select<
         <ReactSelect
             {...props}
             theme={(theme) => ({ ...theme, borderRadius: 5 })}
+            styles={{
+                control: (baseStyles, state) => ({
+                  ...baseStyles,
+                  minWidth: 130
+                }),
+              }}
         />
     )
 }
