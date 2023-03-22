@@ -14,9 +14,13 @@ import {
     SetPokemonListIsLoading,
 } from '../types/functions'
 
+import { updateURLQueryParams, getAllURLQueryParams } from '../utils/urlUtils'
+
 import { Ability } from '../types/app'
 
 import { notificationError } from '../components/Notifications'
+
+import { extractPokemonIdFromUrl, buildPokemonUrlById } from '../utils/urlUtils'
 
 interface PokeAbilitiesProps {
     readonly setIsApiDown: SetIsApiDown
@@ -26,12 +30,27 @@ interface PokeAbilitiesProps {
 
 const MAX_OPTIONS_LIMIT = 20
 
+const extractAbilitiesFromUrl = (queryParams: Array<string> | undefined) => {
+    if (queryParams !== undefined) {
+        return queryParams.map((queryParam) => {
+            const values = queryParam.split('_')
+
+            return {
+                label: values[0],
+                value: buildPokemonUrlById(values[1]),
+            }
+        })
+    }
+
+    return undefined
+}
+
 const PokeAbilities = (props: PokeAbilitiesProps) => {
     const { setIsApiDown, setPokemonList, setPokemonListIsLoading } = props
 
     const [selectedAbilities, setSelectedAbilities] = useState<
         MultiValue<Option>
-    >([])
+    >(extractAbilitiesFromUrl(getAllURLQueryParams('ability')) ?? [])
 
     const [abilitiesList, setAbilitesList] = useState<Array<Ability>>([])
 
@@ -63,7 +82,7 @@ const PokeAbilities = (props: PokeAbilitiesProps) => {
                 if (selectedAbilities.length !== 0) {
                     const results = await getPokemonsByAbilities(
                         selectedAbilities.map(
-                            (abilityOption) => abilityOption.value
+                            (abilityOption) => abilityOption.label
                         )
                     )
 
@@ -101,6 +120,18 @@ const PokeAbilities = (props: PokeAbilitiesProps) => {
         setPokemonListIsLoading,
     ])
 
+    useEffect(() => {
+        updateURLQueryParams(
+            'ability',
+            selectedAbilities.map(
+                (selectedAbility) =>
+                    `${selectedAbility.label}_${extractPokemonIdFromUrl(
+                        selectedAbility.value
+                    )}`
+            )
+        )
+    }, [selectedAbilities])
+
     const remainingAbilities = abilitiesList
         .filter((ability) => {
             return (
@@ -123,7 +154,7 @@ const PokeAbilities = (props: PokeAbilitiesProps) => {
                     value={selectedAbilities}
                     onChange={(options) => setSelectedAbilities(options)}
                     options={remainingAbilities.map((ability) => ({
-                        value: ability.name,
+                        value: ability.url,
                         label: ability.name,
                     }))}
                 />
