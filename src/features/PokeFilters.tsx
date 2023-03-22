@@ -78,7 +78,6 @@ const PokeFilters = (props: PokeFiltersProps) => {
             </div>
             <div className={styles.dropdownFilters}>
                 <PokeAbilities
-                    pokemonListIsLoading={pokemonListIsLoading}
                     setPokemonListIsLoading={setPokemonListIsLoading}
                     setPokemonList={setPokemonList}
                     setIsApiDown={setIsApiDown}

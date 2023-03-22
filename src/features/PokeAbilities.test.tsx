@@ -34,7 +34,6 @@ describe('<PokeAbilities/>', () => {
             setIsApiDown: jest.fn(),
             setPokemonList: jest.fn(),
             setPokemonListIsLoading: jest.fn(),
-            pokemonListIsLoading: false,
         }
     })
 
@@ -95,10 +94,6 @@ describe('<PokeAbilities/>', () => {
             'ability-2'
         )
 
-        const apply = screen.getByText('Apply filters')
-
-        fireEvent.click(apply)
-
         expect(mockGetPokemonsByAbilities).toHaveBeenCalledWith(['ability-2'])
     })
 
@@ -132,10 +127,6 @@ describe('<PokeAbilities/>', () => {
             await screen.findByLabelText('Filter by abilities:'),
             'ability-2'
         )
-
-        const apply = screen.getByText('Apply filters')
-
-        fireEvent.click(apply)
 
         await waitFor(() => {
             expect(props.setPokemonList).toHaveBeenCalledWith([
@@ -175,10 +166,6 @@ describe('<PokeAbilities/>', () => {
             'ability-2'
         )
 
-        const apply = screen.getByText('Apply filters')
-
-        fireEvent.click(apply)
-
         await waitFor(() => {
             expect(props.setIsApiDown).toHaveBeenCalledWith(false)
         })
@@ -214,10 +201,6 @@ describe('<PokeAbilities/>', () => {
         await selectEvent.clearAll(
             await screen.findByLabelText('Filter by abilities:')
         )
-
-        const apply = screen.getByText('Apply filters')
-
-        fireEvent.click(apply)
 
         expect(mockListPokemon).toHaveBeenCalled()
     })
@@ -256,10 +239,6 @@ describe('<PokeAbilities/>', () => {
         await selectEvent.clearAll(
             await screen.findByLabelText('Filter by abilities:')
         )
-
-        const apply = screen.getByText('Apply filters')
-
-        fireEvent.click(apply)
 
         await waitFor(() => {
             expect(props.setPokemonList).toHaveBeenCalledWith([
@@ -303,10 +282,6 @@ describe('<PokeAbilities/>', () => {
             await screen.findByLabelText('Filter by abilities:')
         )
 
-        const apply = screen.getByText('Apply filters')
-
-        fireEvent.click(apply)
-
         await waitFor(() => {
             expect(props.setIsApiDown).toHaveBeenCalledWith(false)
         })
@@ -338,7 +313,7 @@ describe('<PokeAbilities/>', () => {
         })
     })
 
-    it('should call setPokemonListIsLoading(true) when clicking Apply filters', async () => {
+    it('should call setPokemonListIsLoading(true) when choosing abilities', async () => {
         await mockListAbilities.mockResolvedValue([
             {
                 name: 'ability-1',
@@ -368,10 +343,6 @@ describe('<PokeAbilities/>', () => {
             await screen.findByLabelText('Filter by abilities:'),
             'ability-2'
         )
-
-        const apply = screen.getByText('Apply filters')
-
-        fireEvent.click(apply)
 
         await waitFor(() => {
             expect(props.setPokemonListIsLoading).toHaveBeenCalledWith(true)
@@ -408,10 +379,6 @@ describe('<PokeAbilities/>', () => {
             await screen.findByLabelText('Filter by abilities:'),
             'ability-2'
         )
-
-        const apply = screen.getByText('Apply filters')
-
-        fireEvent.click(apply)
 
         await waitFor(() => {
             expect(props.setPokemonListIsLoading).toHaveBeenCalledWith(false)
