@@ -21,7 +21,6 @@ interface PokeFiltersProps {
     readonly setPokemonList: SetPokemonList
     readonly setIsApiDown: SetIsApiDown
     readonly setPokemonListIsLoading: SetPokemonListIsLoading
-    readonly pokemonListIsLoading: boolean
 }
 
 const pageSizeOptions = [
@@ -56,7 +55,6 @@ const PokeFilters = (props: PokeFiltersProps) => {
         setIsApiDown,
         setPokemonList,
         setPokemonListIsLoading,
-        pokemonListIsLoading,
     } = props
 
     return (

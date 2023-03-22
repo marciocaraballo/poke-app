@@ -84,7 +84,6 @@ function App() {
             <main className={styles.content}>
                 <PokeFilters
                     pageSize={pageSize}
-                    pokemonListIsLoading={pokemonListIsLoading}
                     setPokemonListIsLoading={setPokemonListIsLoading}
                     setPageSize={setPageSize}
                     nameOrIdFilter={nameOrIdFilter}

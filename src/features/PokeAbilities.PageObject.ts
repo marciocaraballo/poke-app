@@ -12,15 +12,8 @@ const PokeAbilitiesPO = (page: Page) => {
         await abilitiesSelectPO.select(ability)
     }
 
-    const clickApply = async () => {
-        const applyButton = page.getByRole('button', { name: 'Apply' })
-
-        await applyButton.click()
-    }
-
     return {
         chooseAbility,
-        clickApply,
     }
 }
 
