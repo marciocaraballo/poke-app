@@ -141,7 +141,7 @@ describe('<App/>', () => {
         expect(mockGetURLQueryParams.mock.calls[0][0]).toEqual('nameOrId')
     })
 
-    it('should call getURLQueryParams() to retrieve url filter', async () => {
+    it('should call getURLQueryParams() to retrieve selectedId filter', async () => {
         await mockListAbilities.mockResolvedValue([
             {
                 name: 'ability-1',
@@ -172,7 +172,7 @@ describe('<App/>', () => {
 
         await screen.findByText('pikachu')
 
-        expect(mockGetURLQueryParams.mock.calls[1][0]).toEqual('url')
+        expect(mockGetURLQueryParams.mock.calls[1][0]).toEqual('selectedId')
     })
 
     it('should call getURLQueryParams() to retrieve pageSize filter', async () => {
