@@ -3,7 +3,6 @@ const updateURLQueryParams = (name: string, value: string | Array<string>) => {
 
     if (Array.isArray(value)) {
         queryParams.delete(name)
-        //queryParams.set(name, '')
         value.map((val) => queryParams.append(name, encodeURI(val)))
     } else {
         queryParams.set(name, encodeURI(value))

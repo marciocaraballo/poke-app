@@ -20,6 +20,8 @@ import { Ability } from '../types/app'
 
 import { notificationError } from '../components/Notifications'
 
+import { extractPokemonIdFromUrl, buildPokemonUrlById } from '../utils/urlUtils'
+
 interface PokeAbilitiesProps {
     readonly setIsApiDown: SetIsApiDown
     readonly setPokemonList: SetPokemonList
@@ -28,12 +30,27 @@ interface PokeAbilitiesProps {
 
 const MAX_OPTIONS_LIMIT = 20
 
+const extractAbilitiesFromUrl = (queryParams: Array<string> | undefined) => {
+    if (queryParams !== undefined) {
+        return queryParams.map((queryParam) => {
+            const values = queryParam.split('_')
+
+            return {
+                label: values[0],
+                value: buildPokemonUrlById(values[1]),
+            }
+        })
+    }
+
+    return undefined
+}
+
 const PokeAbilities = (props: PokeAbilitiesProps) => {
     const { setIsApiDown, setPokemonList, setPokemonListIsLoading } = props
 
     const [selectedAbilities, setSelectedAbilities] = useState<
         MultiValue<Option>
-    >([])
+    >(extractAbilitiesFromUrl(getAllURLQueryParams('ability')) ?? [])
 
     const [abilitiesList, setAbilitesList] = useState<Array<Ability>>([])
 
@@ -42,26 +59,7 @@ const PokeAbilities = (props: PokeAbilitiesProps) => {
             try {
                 const abilitiesListResponse = await listAbilities()
 
-                const abilitiesFromParams = getAllURLQueryParams('ability')
-
-                if (abilitiesFromParams === undefined) {
-                    setAbilitesList(abilitiesListResponse)
-                } else {
-                    const initialAbilities: Array<Ability> = []
-
-                    abilitiesFromParams.forEach((abilityFromParam) => {
-                        const matchedAbility = abilitiesListResponse.find(
-                            (ability) => ability.name === abilityFromParam
-                        )
-
-                        if (matchedAbility !== undefined) {
-                            initialAbilities.push(matchedAbility)
-                        }
-                    })
-
-                    setAbilitesList(initialAbilities)
-                }
-
+                setAbilitesList(abilitiesListResponse)
                 setIsApiDown(false)
             } catch (e) {
                 if (e instanceof Error && (e.cause as number) >= 500) {
@@ -84,7 +82,7 @@ const PokeAbilities = (props: PokeAbilitiesProps) => {
                 if (selectedAbilities.length !== 0) {
                     const results = await getPokemonsByAbilities(
                         selectedAbilities.map(
-                            (abilityOption) => abilityOption.value
+                            (abilityOption) => abilityOption.label
                         )
                     )
 
@@ -125,7 +123,12 @@ const PokeAbilities = (props: PokeAbilitiesProps) => {
     useEffect(() => {
         updateURLQueryParams(
             'ability',
-            selectedAbilities.map((selectedAbility) => selectedAbility.value)
+            selectedAbilities.map(
+                (selectedAbility) =>
+                    `${selectedAbility.label}_${extractPokemonIdFromUrl(
+                        selectedAbility.value
+                    )}`
+            )
         )
     }, [selectedAbilities])
 
@@ -151,7 +154,7 @@ const PokeAbilities = (props: PokeAbilitiesProps) => {
                     value={selectedAbilities}
                     onChange={(options) => setSelectedAbilities(options)}
                     options={remainingAbilities.map((ability) => ({
-                        value: ability.name,
+                        value: ability.url,
                         label: ability.name,
                     }))}
                 />
