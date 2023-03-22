@@ -8,11 +8,22 @@ import { render, screen, waitFor } from '@testing-library/react'
 import App from './App'
 import httpMock from './utils/httpMock'
 
-jest.mock('./features/PokeFilters', () => () => 'PokeAbilities')
-
 describe('<App> - list success', () => {
     it('should render a pokemon list', async () => {
         let pokemonListApiMock = httpMock()
+        let abilitesApiMock = httpMock()
+
+        abilitesApiMock.get('/api/v2/ability', { limit: 500 }).response(200, {
+            count: 1,
+            next: null,
+            previous: null,
+            results: [
+                {
+                    name: 'stench',
+                    url: 'https://pokeapi.co/api/v2/ability/1/',
+                },
+            ],
+        })
 
         pokemonListApiMock
             .get('/api/v2/pokemon', { limit: 3000 })
