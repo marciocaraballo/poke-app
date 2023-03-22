@@ -63,3 +63,9 @@ jobs:
                   name: playwright-report
                   path: playwright-report/
                   retention-days: 30
+    coverage:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: ArtiomTr/jest-coverage-report-action@v2
+
