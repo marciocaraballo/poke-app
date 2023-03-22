@@ -22,6 +22,7 @@ A user can list pokemons, filter by name, ID or (multiple) abilities.
 -   A user should be able to filter pokemon by ID or name
 -   A user should be able to see a list of details associated to a specific pokemon
 -   A user should be informed about the status of the API
+-   A user should be able to share the page with the selected filters
 
 ## App
 
@@ -29,8 +30,10 @@ Two layouts are supported
 
 Mobile:
 
-![mobile](https://user-images.githubusercontent.com/2772762/226892870-df8626b6-579d-4d6a-b13f-cd5affeda914.png)
+![mobile](https://user-images.githubusercontent.com/2772762/227058379-df86cffa-9fcf-439c-a176-96cf26745201.png)
 
 Tablet / Desktop
 
-![desktop](https://user-images.githubusercontent.com/2772762/226892883-c7caa346-544b-4c4d-a366-8f153985d208.png)
+![desktop](https://user-images.githubusercontent.com/2772762/227058389-525bb180-f278-4d7b-bb93-ce3d79fb448a.png)
+
+
