@@ -17,7 +17,8 @@ import {
 import { updateURLQueryParams, getAllURLQueryParams } from '../utils/urlUtils'
 
 import { Ability } from '../types/app'
-import toast from 'react-hot-toast'
+
+import { notificationError } from '../components/Notifications'
 
 interface PokeAbilitiesProps {
     readonly setIsApiDown: SetIsApiDown
@@ -46,18 +47,19 @@ const PokeAbilities = (props: PokeAbilitiesProps) => {
                 if (abilitiesFromParams === undefined) {
                     setAbilitesList(abilitiesListResponse)
                 } else {
+                    const initialAbilities: Array<Ability> = []
 
-                    const initialAbilities: Array<Ability> = [];
-
-                    abilitiesFromParams.forEach(abilityFromParam => {
-                        const matchedAbility = abilitiesListResponse.find(ability => ability.name === abilityFromParam)
+                    abilitiesFromParams.forEach((abilityFromParam) => {
+                        const matchedAbility = abilitiesListResponse.find(
+                            (ability) => ability.name === abilityFromParam
+                        )
 
                         if (matchedAbility !== undefined) {
                             initialAbilities.push(matchedAbility)
                         }
                     })
 
-                    setAbilitesList(initialAbilities);
+                    setAbilitesList(initialAbilities)
                 }
 
                 setIsApiDown(false)
@@ -65,7 +67,7 @@ const PokeAbilities = (props: PokeAbilitiesProps) => {
                 if (e instanceof Error && (e.cause as number) >= 500) {
                     setIsApiDown(true)
                 }
-                toast.error('Something went wrong with API call')
+                notificationError('Something went wrong with API call')
             }
         }
 
@@ -102,7 +104,7 @@ const PokeAbilities = (props: PokeAbilitiesProps) => {
                 if (e instanceof Error && (e.cause as number) >= 500) {
                     setIsApiDown(true)
                 }
-                toast.error('Something went wrong with API call')
+                notificationError('Something went wrong with API call')
             }
 
             setPokemonListIsLoading(false)

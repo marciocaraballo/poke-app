@@ -7,9 +7,15 @@ import PokeFilters from './features/PokeFilters'
 import PokeGrid from './features/PokeCards'
 import PokeDetails from './features/PokeDetails'
 import { Pokemon } from './types/app'
-import { Toaster } from 'react-hot-toast'
 
-import { updateURLQueryParams, getURLQueryParams } from './utils/urlUtils'
+import { Notifications } from './components/Notifications'
+
+import {
+    updateURLQueryParams,
+    getURLQueryParams,
+    extractPokemonIdFromUrl,
+    buildPokemonUrlById,
+} from './utils/urlUtils'
 
 function App() {
     const [isOnline, setIsOnline] = useState(navigator.onLine)
@@ -20,7 +26,9 @@ function App() {
         getURLQueryParams('nameOrId') ?? ''
     )
     const [selectedPokemonUrl, setSelectedPokemonUrl] = useState(
-        getURLQueryParams('url') ?? ''
+        getURLQueryParams('selectedId')
+            ? buildPokemonUrlById(getURLQueryParams('selectedId') as string)
+            : ''
     )
     const [pageSize, setPageSize] = useState(
         getURLQueryParams('pageSize') !== undefined
@@ -49,7 +57,14 @@ function App() {
     }, [pageSize])
 
     useEffect(() => {
-        updateURLQueryParams('url', selectedPokemonUrl)
+        if (selectedPokemonUrl !== '') {
+            updateURLQueryParams(
+                'selectedId',
+                extractPokemonIdFromUrl(selectedPokemonUrl)
+            )
+        } else {
+            updateURLQueryParams('selectedId', '')
+        }
     }, [selectedPokemonUrl])
 
     return (
@@ -82,7 +97,7 @@ function App() {
                     />
                 </div>
             </main>
-            <Toaster position="bottom-center" reverseOrder={false} />
+            <Notifications />
         </div>
     )
 }

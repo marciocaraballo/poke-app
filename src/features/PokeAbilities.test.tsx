@@ -1,7 +1,7 @@
 import selectEvent from 'react-select-event'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import PokeAbilities, { PokeAbilitiesProps } from './PokeAbilities'
-import toast from 'react-hot-toast'
+import { notificationError } from '../components/Notifications'
 
 import {
     listAbilities,
@@ -10,10 +10,14 @@ import {
 } from '../api/fetch'
 
 jest.mock('../api/fetch')
-jest.mock('react-hot-toast')
+jest.mock('../components/Notifications')
 
 const mockListAbilities = listAbilities as jest.MockedFunction<
     typeof listAbilities
+>
+
+const mockNotificationError = notificationError as jest.MockedFunction<
+    typeof notificationError
 >
 
 const mockGetPokemonsByAbilities =
@@ -27,8 +31,6 @@ describe('<PokeAbilities/>', () => {
     beforeEach(() => {
         jest.resetModules()
         jest.resetAllMocks()
-
-        toast.error = jest.fn()
 
         props = {
             setIsApiDown: jest.fn(),
@@ -295,7 +297,7 @@ describe('<PokeAbilities/>', () => {
         render(<PokeAbilities {...props} />)
 
         await waitFor(() => {
-            expect(toast.error).toHaveBeenCalledWith(
+            expect(mockNotificationError).toHaveBeenCalledWith(
                 'Something went wrong with API call'
             )
         })

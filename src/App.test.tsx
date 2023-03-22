@@ -1,17 +1,22 @@
 import { render, screen, waitFor } from '@testing-library/react'
 import App from './App'
 import { listPokemons, listAbilities } from './api/fetch'
-import toast from 'react-hot-toast'
+import { notificationError } from './components/Notifications'
 import { getURLQueryParams } from './utils/urlUtils'
 
 jest.mock('./api/fetch')
-jest.mock('react-hot-toast')
+jest.mock('./components/Notifications')
 jest.mock('./utils/urlUtils')
 
 const mockListPokemon = listPokemons as jest.MockedFunction<typeof listPokemons>
 const mockGetURLQueryParams = getURLQueryParams as jest.MockedFunction<
     typeof getURLQueryParams
 >
+
+const mockNotificationError = notificationError as jest.MockedFunction<
+    typeof notificationError
+>
+
 const mockListAbilities = listAbilities as jest.MockedFunction<
     typeof listAbilities
 >
@@ -20,8 +25,6 @@ describe('<App/>', () => {
     beforeEach(() => {
         jest.resetModules()
         jest.resetAllMocks()
-
-        toast.error = jest.fn()
     })
 
     it('should render a pokemon list', async () => {
@@ -81,7 +84,7 @@ describe('<App/>', () => {
         render(<App />)
 
         await waitFor(() => {
-            expect(toast.error).toHaveBeenCalledWith(
+            expect(mockNotificationError).toHaveBeenCalledWith(
                 'Something went wrong with API call'
             )
         })
@@ -141,7 +144,7 @@ describe('<App/>', () => {
         expect(mockGetURLQueryParams.mock.calls[0][0]).toEqual('nameOrId')
     })
 
-    it('should call getURLQueryParams() to retrieve url filter', async () => {
+    it('should call getURLQueryParams() to retrieve selectedId filter', async () => {
         await mockListAbilities.mockResolvedValue([
             {
                 name: 'ability-1',
@@ -172,7 +175,7 @@ describe('<App/>', () => {
 
         await screen.findByText('pikachu')
 
-        expect(mockGetURLQueryParams.mock.calls[1][0]).toEqual('url')
+        expect(mockGetURLQueryParams.mock.calls[1][0]).toEqual('selectedId')
     })
 
     it('should call getURLQueryParams() to retrieve pageSize filter', async () => {
