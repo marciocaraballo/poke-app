@@ -15,7 +15,7 @@ function Select<
     return (
         <ReactSelect
             {...props}
-            theme={(theme) => ({ ...theme, borderRadius: 0 })}
+            theme={(theme) => ({ ...theme, borderRadius: 5 })}
         />
     )
 }

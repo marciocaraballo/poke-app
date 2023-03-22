@@ -11,12 +11,22 @@
     --color-yellow: yellow;
     --color-blue: blue;
 
+    /** Name that color! */
     --color-silver: #cccccc;
     --color-dodger-blue: #2684ff;
     --color-gray: #808080;
 
     --header-height: 85px;
     --filters-height: 90px;
+
+    --input-width: 140px;
+
+    --font-size-default: 14px;
+
+    --font-weight-semi-bold: 500;
+
+    /** Value has to align between app controls and react-select */
+    --border-radius-default: 5px;
 }
 
 html,
@@ -57,7 +67,7 @@ li {
 }
 
 figcaption {
-    font-size: 14px;
+    font-size: var(--font-size-default);
 }
 
 figure {
