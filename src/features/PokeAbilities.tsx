@@ -14,6 +14,8 @@ import {
     SetPokemonListIsLoading,
 } from '../types/functions'
 
+import { updateURLQueryParams, getAllURLQueryParams } from '../utils/urlUtils'
+
 import { Ability } from '../types/app'
 import toast from 'react-hot-toast'
 
@@ -39,7 +41,25 @@ const PokeAbilities = (props: PokeAbilitiesProps) => {
             try {
                 const abilitiesListResponse = await listAbilities()
 
-                setAbilitesList(abilitiesListResponse)
+                const abilitiesFromParams = getAllURLQueryParams('ability')
+
+                if (abilitiesFromParams === undefined) {
+                    setAbilitesList(abilitiesListResponse)
+                } else {
+
+                    const initialAbilities: Array<Ability> = [];
+
+                    abilitiesFromParams.forEach(abilityFromParam => {
+                        const matchedAbility = abilitiesListResponse.find(ability => ability.name === abilityFromParam)
+
+                        if (matchedAbility !== undefined) {
+                            initialAbilities.push(matchedAbility)
+                        }
+                    })
+
+                    setAbilitesList(initialAbilities);
+                }
+
                 setIsApiDown(false)
             } catch (e) {
                 if (e instanceof Error && (e.cause as number) >= 500) {
@@ -99,6 +119,13 @@ const PokeAbilities = (props: PokeAbilitiesProps) => {
         setPokemonList,
         setPokemonListIsLoading,
     ])
+
+    useEffect(() => {
+        updateURLQueryParams(
+            'ability',
+            selectedAbilities.map((selectedAbility) => selectedAbility.value)
+        )
+    }, [selectedAbilities])
 
     const remainingAbilities = abilitiesList
         .filter((ability) => {
