@@ -16,4 +16,16 @@ const getURLQueryParams = (name: string) => {
     return undefined
 }
 
-export { updateURLQueryParams, getURLQueryParams }
+const buildUrlWithHostname = (url: string) => `https://pokeapi.co/api/v2${url}`
+const buildPokemonUrlById = (abilityId: string) =>
+    `${buildUrlWithHostname('/pokemon/' + abilityId)}`
+
+const extractPokemonIdFromUrl = (url: string) => url.split('/')[6]
+
+export {
+    updateURLQueryParams,
+    getURLQueryParams,
+    buildUrlWithHostname,
+    buildPokemonUrlById,
+    extractPokemonIdFromUrl,
+}

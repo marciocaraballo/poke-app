@@ -14,7 +14,7 @@ import cacheStore from './cacheStore'
 
 import findUniquePokemon from '../utils/findUniquePokemons'
 
-const buildUrlWithHostname = (url: string) => `https://pokeapi.co/api/v2${url}`
+import { buildUrlWithHostname } from '../utils/urlUtils'
 
 const localCacheStore = cacheStore()
 
