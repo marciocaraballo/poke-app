@@ -1,4 +1,4 @@
-import ReactSelect, { GroupBase, MultiValue, Props } from 'react-select'
+import ReactSelect, { GroupBase, MultiValue, Props, Theme } from 'react-select'
 
 type Value = MultiValue<Option>
 
@@ -16,6 +16,12 @@ function Select<
         <ReactSelect
             {...props}
             theme={(theme) => ({ ...theme, borderRadius: 5 })}
+            styles={{
+                control: (baseStyles, state) => ({
+                  ...baseStyles,
+                  minWidth: 130
+                }),
+              }}
         />
     )
 }
