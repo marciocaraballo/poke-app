@@ -1,4 +1,4 @@
-import ReactSelect, { GroupBase, MultiValue, Props, Theme } from 'react-select'
+import ReactSelect, { GroupBase, MultiValue, Props } from 'react-select'
 
 type Value = MultiValue<Option>
 
