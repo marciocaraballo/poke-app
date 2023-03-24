@@ -43,10 +43,12 @@ const PokeCards = (props: PokeCardsProps) => {
         )
     }
 
+    const pagedPokemons = filteredPokemons.slice(0, pageSize);
+
     return (
-        <div className={styles.cards}>
+        <div className={styles.cards} aria-live="polite">
             <div className={styles.layout}>
-                {filteredPokemons.slice(0, pageSize).map((pokemon) => (
+                {pagedPokemons.map((pokemon) => (
                     <Card
                         dataTestId="poke-card"
                         key={pokemon.name}
