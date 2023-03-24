@@ -35,5 +35,3 @@ Mobile:
 Tablet / Desktop
 
 ![desktop](https://user-images.githubusercontent.com/2772762/227058389-525bb180-f278-4d7b-bb93-ce3d79fb448a.png)
-
-

@@ -54,7 +54,7 @@ const PokeAbilities = (props: PokeAbilitiesProps) => {
 
     const [abilitiesList, setAbilitesList] = useState<Array<Ability>>([])
 
-    const [abilitiesInputSearch, setAbilitiesInputSearch] = useState('');
+    const [abilitiesInputSearch, setAbilitiesInputSearch] = useState('')
 
     useEffect(() => {
         async function fetchAbilitiesList() {
@@ -155,7 +155,9 @@ const PokeAbilities = (props: PokeAbilitiesProps) => {
                     inputId="abilities"
                     placeholder="abilities"
                     value={selectedAbilities}
-                    onInputChange={(searchText) => setAbilitiesInputSearch(searchText)}
+                    onInputChange={(searchText) =>
+                        setAbilitiesInputSearch(searchText)
+                    }
                     onChange={(options) => setSelectedAbilities(options)}
                     options={remainingAbilities.map((ability) => ({
                         value: ability.url,

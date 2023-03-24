@@ -57,14 +57,10 @@ function App() {
     }, [pageSize])
 
     useEffect(() => {
-        if (selectedPokemonUrl !== '') {
-            updateURLQueryParams(
-                'selectedId',
-                extractPokemonIdFromUrl(selectedPokemonUrl)
-            )
-        } else {
-            updateURLQueryParams('selectedId', '')
-        }
+        updateURLQueryParams(
+            'selectedId',
+            extractPokemonIdFromUrl(selectedPokemonUrl) ?? ''
+        )
     }, [selectedPokemonUrl])
 
     return (
