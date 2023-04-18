@@ -10,6 +10,8 @@ import { Pokemon } from './types/app'
 
 import { Notifications } from './components/Notifications'
 
+import useOnlineStatus from './hooks/useOnlineStatus'
+
 import {
     updateURLQueryParams,
     getURLQueryParams,
@@ -18,7 +20,8 @@ import {
 } from './utils/urlUtils'
 
 function App() {
-    const [isOnline, setIsOnline] = useState(navigator.onLine)
+
+    const isOnline = useOnlineStatus();
     const [pokemonListIsLoading, setPokemonListIsLoading] = useState(false)
     const [isApiDown, setIsApiDown] = useState(false)
     const [pokemonList, setPokemonList] = useState<ReadonlyArray<Pokemon>>([])
@@ -35,18 +38,6 @@ function App() {
             ? parseInt(getURLQueryParams('pageSize') as string, 10)
             : 50
     )
-
-    useEffect(() => {
-        const onOnlineStatusUpdate = () => setIsOnline(navigator.onLine)
-
-        window.addEventListener('online', onOnlineStatusUpdate)
-        window.addEventListener('offline', onOnlineStatusUpdate)
-
-        return () => {
-            window.removeEventListener('online', onOnlineStatusUpdate)
-            window.removeEventListener('offline', onOnlineStatusUpdate)
-        }
-    }, [])
 
     useEffect(() => {
         updateURLQueryParams('nameOrId', nameOrIdFilter)
