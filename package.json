@@ -52,7 +52,7 @@
         "@types/react-dom": "18.2.7",
         "husky": "8.0.3",
         "nock": "13.3.3",
-        "prettier": "3.0.1",
+        "prettier": "3.0.3",
         "react-select-event": "^5.5.1"
     },
     "jest": {
